@@ -18,6 +18,65 @@ class Raylib {
           lookup)
       : _lookup = lookup;
 
+  void __va_start(
+    ffi.Pointer<va_list> arg0,
+  ) {
+    return ___va_start(
+      arg0,
+    );
+  }
+
+  late final ___va_startPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<va_list>)>>(
+          '__va_start');
+  late final ___va_start =
+      ___va_startPtr.asFunction<void Function(ffi.Pointer<va_list>)>();
+
+  void __security_init_cookie() {
+    return ___security_init_cookie();
+  }
+
+  late final ___security_init_cookiePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          '__security_init_cookie');
+  late final ___security_init_cookie =
+      ___security_init_cookiePtr.asFunction<void Function()>();
+
+  void __security_check_cookie(
+    int _StackCookie,
+  ) {
+    return ___security_check_cookie(
+      _StackCookie,
+    );
+  }
+
+  late final ___security_check_cookiePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(uintptr_t)>>(
+          '__security_check_cookie');
+  late final ___security_check_cookie =
+      ___security_check_cookiePtr.asFunction<void Function(int)>();
+
+  void __report_gsfailure(
+    int _StackCookie,
+  ) {
+    return ___report_gsfailure(
+      _StackCookie,
+    );
+  }
+
+  late final ___report_gsfailurePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(uintptr_t)>>(
+          '__report_gsfailure');
+  late final ___report_gsfailure =
+      ___report_gsfailurePtr.asFunction<void Function(int)>();
+
+  late final ffi.Pointer<uintptr_t> ___security_cookie =
+      _lookup<uintptr_t>('__security_cookie');
+
+  int get __security_cookie => ___security_cookie.value;
+
+  set __security_cookie(int value) => ___security_cookie.value = value;
+
   /// Window-related functions
   void InitWindow(
     int width,
@@ -280,6 +339,20 @@ class Raylib {
   late final _SetWindowSize =
       _SetWindowSizePtr.asFunction<void Function(int, int)>();
 
+  void SetWindowOpacity(
+    double opacity,
+  ) {
+    return _SetWindowOpacity(
+      opacity,
+    );
+  }
+
+  late final _SetWindowOpacityPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Float)>>(
+          'SetWindowOpacity');
+  late final _SetWindowOpacity =
+      _SetWindowOpacityPtr.asFunction<void Function(double)>();
+
   ffi.Pointer<ffi.Void> GetWindowHandle() {
     return _GetWindowHandle();
   }
@@ -306,6 +379,23 @@ class Raylib {
       _lookup<ffi.NativeFunction<ffi.Int32 Function()>>('GetScreenHeight');
   late final _GetScreenHeight =
       _GetScreenHeightPtr.asFunction<int Function()>();
+
+  int GetRenderWidth() {
+    return _GetRenderWidth();
+  }
+
+  late final _GetRenderWidthPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>('GetRenderWidth');
+  late final _GetRenderWidth = _GetRenderWidthPtr.asFunction<int Function()>();
+
+  int GetRenderHeight() {
+    return _GetRenderHeight();
+  }
+
+  late final _GetRenderHeightPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>('GetRenderHeight');
+  late final _GetRenderHeight =
+      _GetRenderHeightPtr.asFunction<int Function()>();
 
   int GetMonitorCount() {
     return _GetMonitorCount();
@@ -465,6 +555,24 @@ class Raylib {
   late final _GetClipboardText =
       _GetClipboardTextPtr.asFunction<ffi.Pointer<ffi.Int8> Function()>();
 
+  void EnableEventWaiting() {
+    return _EnableEventWaiting();
+  }
+
+  late final _EnableEventWaitingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('EnableEventWaiting');
+  late final _EnableEventWaiting =
+      _EnableEventWaitingPtr.asFunction<void Function()>();
+
+  void DisableEventWaiting() {
+    return _DisableEventWaiting();
+  }
+
+  late final _DisableEventWaitingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('DisableEventWaiting');
+  late final _DisableEventWaiting =
+      _DisableEventWaitingPtr.asFunction<void Function()>();
+
   /// Custom frame control functions
   /// NOTE: Those functions are intended for advance users that want full control over the frame processing
   /// By default EndDrawing() does this job: draws everything + SwapScreenBuffer() + manage frame timming + PollInputEvents()
@@ -488,15 +596,15 @@ class Raylib {
       _PollInputEventsPtr.asFunction<void Function()>();
 
   void WaitTime(
-    double ms,
+    double seconds,
   ) {
     return _WaitTime(
-      ms,
+      seconds,
     );
   }
 
   late final _WaitTimePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Float)>>('WaitTime');
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Double)>>('WaitTime');
   late final _WaitTime = _WaitTimePtr.asFunction<void Function(double)>();
 
   /// Cursor-related functions
@@ -989,6 +1097,22 @@ class Raylib {
   late final _GetWorldToScreen =
       _GetWorldToScreenPtr.asFunction<Vector2 Function(Vector3, Camera)>();
 
+  Vector2 GetScreenToWorld2D(
+    Vector2 position,
+    Camera2D camera,
+  ) {
+    return _GetScreenToWorld2D(
+      position,
+      camera,
+    );
+  }
+
+  late final _GetScreenToWorld2DPtr =
+      _lookup<ffi.NativeFunction<Vector2 Function(Vector2, Camera2D)>>(
+          'GetScreenToWorld2D');
+  late final _GetScreenToWorld2D =
+      _GetScreenToWorld2DPtr.asFunction<Vector2 Function(Vector2, Camera2D)>();
+
   Vector2 GetWorldToScreenEx(
     Vector3 position,
     Camera camera,
@@ -1025,22 +1149,6 @@ class Raylib {
           'GetWorldToScreen2D');
   late final _GetWorldToScreen2D =
       _GetWorldToScreen2DPtr.asFunction<Vector2 Function(Vector2, Camera2D)>();
-
-  Vector2 GetScreenToWorld2D(
-    Vector2 position,
-    Camera2D camera,
-  ) {
-    return _GetScreenToWorld2D(
-      position,
-      camera,
-    );
-  }
-
-  late final _GetScreenToWorld2DPtr =
-      _lookup<ffi.NativeFunction<Vector2 Function(Vector2, Camera2D)>>(
-          'GetScreenToWorld2D');
-  late final _GetScreenToWorld2D =
-      _GetScreenToWorld2DPtr.asFunction<Vector2 Function(Vector2, Camera2D)>();
 
   /// Timing-related functions
   void SetTargetFPS(
@@ -1213,6 +1321,20 @@ class Raylib {
   late final _MemFree =
       _MemFreePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
+  void OpenURL(
+    ffi.Pointer<ffi.Int8> url,
+  ) {
+    return _OpenURL(
+      url,
+    );
+  }
+
+  late final _OpenURLPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Int8>)>>(
+          'OpenURL');
+  late final _OpenURL =
+      _OpenURLPtr.asFunction<void Function(ffi.Pointer<ffi.Int8>)>();
+
   /// Set custom callbacks
   /// WARNING: Callbacks setup is intended for advance users
   void SetTraceLogCallback(
@@ -1338,6 +1460,26 @@ class Raylib {
   late final _SaveFileData = _SaveFileDataPtr.asFunction<
       int Function(ffi.Pointer<ffi.Int8>, ffi.Pointer<ffi.Void>, int)>();
 
+  bool ExportDataAsCode(
+    ffi.Pointer<ffi.Int8> data,
+    int size,
+    ffi.Pointer<ffi.Int8> fileName,
+  ) {
+    return _ExportDataAsCode(
+          data,
+          size,
+          fileName,
+        ) !=
+        0;
+  }
+
+  late final _ExportDataAsCodePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint8 Function(ffi.Pointer<ffi.Int8>, ffi.Uint32,
+              ffi.Pointer<ffi.Int8>)>>('ExportDataAsCode');
+  late final _ExportDataAsCode = _ExportDataAsCodePtr.asFunction<
+      int Function(ffi.Pointer<ffi.Int8>, int, ffi.Pointer<ffi.Int8>)>();
+
   ffi.Pointer<ffi.Int8> LoadFileText(
     ffi.Pointer<ffi.Int8> fileName,
   ) {
@@ -1433,6 +1575,20 @@ class Raylib {
   late final _IsFileExtension = _IsFileExtensionPtr.asFunction<
       int Function(ffi.Pointer<ffi.Int8>, ffi.Pointer<ffi.Int8>)>();
 
+  int GetFileLength(
+    ffi.Pointer<ffi.Int8> fileName,
+  ) {
+    return _GetFileLength(
+      fileName,
+    );
+  }
+
+  late final _GetFileLengthPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Int8>)>>(
+          'GetFileLength');
+  late final _GetFileLength =
+      _GetFileLengthPtr.asFunction<int Function(ffi.Pointer<ffi.Int8>)>();
+
   ffi.Pointer<ffi.Int8> GetFileExtension(
     ffi.Pointer<ffi.Int8> fileName,
   ) {
@@ -1518,32 +1674,15 @@ class Raylib {
   late final _GetWorkingDirectory =
       _GetWorkingDirectoryPtr.asFunction<ffi.Pointer<ffi.Int8> Function()>();
 
-  ffi.Pointer<ffi.Pointer<ffi.Int8>> GetDirectoryFiles(
-    ffi.Pointer<ffi.Int8> dirPath,
-    ffi.Pointer<ffi.Int32> count,
-  ) {
-    return _GetDirectoryFiles(
-      dirPath,
-      count,
-    );
+  ffi.Pointer<ffi.Int8> GetApplicationDirectory() {
+    return _GetApplicationDirectory();
   }
 
-  late final _GetDirectoryFilesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<ffi.Int8>> Function(ffi.Pointer<ffi.Int8>,
-              ffi.Pointer<ffi.Int32>)>>('GetDirectoryFiles');
-  late final _GetDirectoryFiles = _GetDirectoryFilesPtr.asFunction<
-      ffi.Pointer<ffi.Pointer<ffi.Int8>> Function(
-          ffi.Pointer<ffi.Int8>, ffi.Pointer<ffi.Int32>)>();
-
-  void ClearDirectoryFiles() {
-    return _ClearDirectoryFiles();
-  }
-
-  late final _ClearDirectoryFilesPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('ClearDirectoryFiles');
-  late final _ClearDirectoryFiles =
-      _ClearDirectoryFilesPtr.asFunction<void Function()>();
+  late final _GetApplicationDirectoryPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int8> Function()>>(
+          'GetApplicationDirectory');
+  late final _GetApplicationDirectory = _GetApplicationDirectoryPtr.asFunction<
+      ffi.Pointer<ffi.Int8> Function()>();
 
   bool ChangeDirectory(
     ffi.Pointer<ffi.Int8> dir,
@@ -1560,6 +1699,69 @@ class Raylib {
   late final _ChangeDirectory =
       _ChangeDirectoryPtr.asFunction<int Function(ffi.Pointer<ffi.Int8>)>();
 
+  bool IsPathFile(
+    ffi.Pointer<ffi.Int8> path,
+  ) {
+    return _IsPathFile(
+          path,
+        ) !=
+        0;
+  }
+
+  late final _IsPathFilePtr =
+      _lookup<ffi.NativeFunction<ffi.Uint8 Function(ffi.Pointer<ffi.Int8>)>>(
+          'IsPathFile');
+  late final _IsPathFile =
+      _IsPathFilePtr.asFunction<int Function(ffi.Pointer<ffi.Int8>)>();
+
+  FilePathList LoadDirectoryFiles(
+    ffi.Pointer<ffi.Int8> dirPath,
+  ) {
+    return _LoadDirectoryFiles(
+      dirPath,
+    );
+  }
+
+  late final _LoadDirectoryFilesPtr =
+      _lookup<ffi.NativeFunction<FilePathList Function(ffi.Pointer<ffi.Int8>)>>(
+          'LoadDirectoryFiles');
+  late final _LoadDirectoryFiles = _LoadDirectoryFilesPtr.asFunction<
+      FilePathList Function(ffi.Pointer<ffi.Int8>)>();
+
+  FilePathList LoadDirectoryFilesEx(
+    ffi.Pointer<ffi.Int8> basePath,
+    ffi.Pointer<ffi.Int8> filter,
+    bool scanSubdirs,
+  ) {
+    return _LoadDirectoryFilesEx(
+      basePath,
+      filter,
+      scanSubdirs ? 1 : 0,
+    );
+  }
+
+  late final _LoadDirectoryFilesExPtr = _lookup<
+      ffi.NativeFunction<
+          FilePathList Function(ffi.Pointer<ffi.Int8>, ffi.Pointer<ffi.Int8>,
+              ffi.Uint8)>>('LoadDirectoryFilesEx');
+  late final _LoadDirectoryFilesEx = _LoadDirectoryFilesExPtr.asFunction<
+      FilePathList Function(
+          ffi.Pointer<ffi.Int8>, ffi.Pointer<ffi.Int8>, int)>();
+
+  void UnloadDirectoryFiles(
+    FilePathList files,
+  ) {
+    return _UnloadDirectoryFiles(
+      files,
+    );
+  }
+
+  late final _UnloadDirectoryFilesPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(FilePathList)>>(
+          'UnloadDirectoryFiles');
+  late final _UnloadDirectoryFiles =
+      _UnloadDirectoryFilesPtr.asFunction<void Function(FilePathList)>();
+
   bool IsFileDropped() {
     return _IsFileDropped() != 0;
   }
@@ -1568,29 +1770,28 @@ class Raylib {
       _lookup<ffi.NativeFunction<ffi.Uint8 Function()>>('IsFileDropped');
   late final _IsFileDropped = _IsFileDroppedPtr.asFunction<int Function()>();
 
-  ffi.Pointer<ffi.Pointer<ffi.Int8>> GetDroppedFiles(
-    ffi.Pointer<ffi.Int32> count,
+  FilePathList LoadDroppedFiles() {
+    return _LoadDroppedFiles();
+  }
+
+  late final _LoadDroppedFilesPtr =
+      _lookup<ffi.NativeFunction<FilePathList Function()>>('LoadDroppedFiles');
+  late final _LoadDroppedFiles =
+      _LoadDroppedFilesPtr.asFunction<FilePathList Function()>();
+
+  void UnloadDroppedFiles(
+    FilePathList files,
   ) {
-    return _GetDroppedFiles(
-      count,
+    return _UnloadDroppedFiles(
+      files,
     );
   }
 
-  late final _GetDroppedFilesPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.Pointer<ffi.Int8>> Function(
-              ffi.Pointer<ffi.Int32>)>>('GetDroppedFiles');
-  late final _GetDroppedFiles = _GetDroppedFilesPtr.asFunction<
-      ffi.Pointer<ffi.Pointer<ffi.Int8>> Function(ffi.Pointer<ffi.Int32>)>();
-
-  void ClearDroppedFiles() {
-    return _ClearDroppedFiles();
-  }
-
-  late final _ClearDroppedFilesPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('ClearDroppedFiles');
-  late final _ClearDroppedFiles =
-      _ClearDroppedFilesPtr.asFunction<void Function()>();
+  late final _UnloadDroppedFilesPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(FilePathList)>>(
+          'UnloadDroppedFiles');
+  late final _UnloadDroppedFiles =
+      _UnloadDroppedFilesPtr.asFunction<void Function(FilePathList)>();
 
   int GetFileModTime(
     ffi.Pointer<ffi.Int8> fileName,
@@ -1609,13 +1810,13 @@ class Raylib {
   /// Compression/Encoding functionality
   ffi.Pointer<ffi.Uint8> CompressData(
     ffi.Pointer<ffi.Uint8> data,
-    int dataLength,
-    ffi.Pointer<ffi.Int32> compDataLength,
+    int dataSize,
+    ffi.Pointer<ffi.Int32> compDataSize,
   ) {
     return _CompressData(
       data,
-      dataLength,
-      compDataLength,
+      dataSize,
+      compDataSize,
     );
   }
 
@@ -1629,13 +1830,13 @@ class Raylib {
 
   ffi.Pointer<ffi.Uint8> DecompressData(
     ffi.Pointer<ffi.Uint8> compData,
-    int compDataLength,
-    ffi.Pointer<ffi.Int32> dataLength,
+    int compDataSize,
+    ffi.Pointer<ffi.Int32> dataSize,
   ) {
     return _DecompressData(
       compData,
-      compDataLength,
-      dataLength,
+      compDataSize,
+      dataSize,
     );
   }
 
@@ -1649,13 +1850,13 @@ class Raylib {
 
   ffi.Pointer<ffi.Int8> EncodeDataBase64(
     ffi.Pointer<ffi.Uint8> data,
-    int dataLength,
-    ffi.Pointer<ffi.Int32> outputLength,
+    int dataSize,
+    ffi.Pointer<ffi.Int32> outputSize,
   ) {
     return _EncodeDataBase64(
       data,
-      dataLength,
-      outputLength,
+      dataSize,
+      outputSize,
     );
   }
 
@@ -1669,11 +1870,11 @@ class Raylib {
 
   ffi.Pointer<ffi.Uint8> DecodeDataBase64(
     ffi.Pointer<ffi.Uint8> data,
-    ffi.Pointer<ffi.Int32> outputLength,
+    ffi.Pointer<ffi.Int32> outputSize,
   ) {
     return _DecodeDataBase64(
       data,
-      outputLength,
+      outputSize,
     );
   }
 
@@ -1684,52 +1885,6 @@ class Raylib {
   late final _DecodeDataBase64 = _DecodeDataBase64Ptr.asFunction<
       ffi.Pointer<ffi.Uint8> Function(
           ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Int32>)>();
-
-  /// Persistent storage management
-  bool SaveStorageValue(
-    int position,
-    int value,
-  ) {
-    return _SaveStorageValue(
-          position,
-          value,
-        ) !=
-        0;
-  }
-
-  late final _SaveStorageValuePtr =
-      _lookup<ffi.NativeFunction<ffi.Uint8 Function(ffi.Uint32, ffi.Int32)>>(
-          'SaveStorageValue');
-  late final _SaveStorageValue =
-      _SaveStorageValuePtr.asFunction<int Function(int, int)>();
-
-  int LoadStorageValue(
-    int position,
-  ) {
-    return _LoadStorageValue(
-      position,
-    );
-  }
-
-  late final _LoadStorageValuePtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Uint32)>>(
-          'LoadStorageValue');
-  late final _LoadStorageValue =
-      _LoadStorageValuePtr.asFunction<int Function(int)>();
-
-  void OpenURL(
-    ffi.Pointer<ffi.Int8> url,
-  ) {
-    return _OpenURL(
-      url,
-    );
-  }
-
-  late final _OpenURLPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Int8>)>>(
-          'OpenURL');
-  late final _OpenURL =
-      _OpenURLPtr.asFunction<void Function(ffi.Pointer<ffi.Int8>)>();
 
   /// Input-related functions: keyboard
   bool IsKeyPressed(
@@ -2117,6 +2272,15 @@ class Raylib {
       _lookup<ffi.NativeFunction<ffi.Float Function()>>('GetMouseWheelMove');
   late final _GetMouseWheelMove =
       _GetMouseWheelMovePtr.asFunction<double Function()>();
+
+  Vector2 GetMouseWheelMoveV() {
+    return _GetMouseWheelMoveV();
+  }
+
+  late final _GetMouseWheelMoveVPtr =
+      _lookup<ffi.NativeFunction<Vector2 Function()>>('GetMouseWheelMoveV');
+  late final _GetMouseWheelMoveV =
+      _GetMouseWheelMoveVPtr.asFunction<Vector2 Function()>();
 
   void SetMouseCursor(
     int cursor,
@@ -5261,6 +5425,23 @@ class Raylib {
       _lookup<ffi.NativeFunction<ffi.Void Function(Font)>>('UnloadFont');
   late final _UnloadFont = _UnloadFontPtr.asFunction<void Function(Font)>();
 
+  bool ExportFontAsCode(
+    Font font,
+    ffi.Pointer<ffi.Int8> fileName,
+  ) {
+    return _ExportFontAsCode(
+          font,
+          fileName,
+        ) !=
+        0;
+  }
+
+  late final _ExportFontAsCodePtr = _lookup<
+          ffi.NativeFunction<ffi.Uint8 Function(Font, ffi.Pointer<ffi.Int8>)>>(
+      'ExportFontAsCode');
+  late final _ExportFontAsCode = _ExportFontAsCodePtr.asFunction<
+      int Function(Font, ffi.Pointer<ffi.Int8>)>();
+
   /// Text drawing functions
   void DrawFPS(
     int posX,
@@ -5378,6 +5559,34 @@ class Raylib {
               Color)>>('DrawTextCodepoint');
   late final _DrawTextCodepoint = _DrawTextCodepointPtr.asFunction<
       void Function(Font, int, Vector2, double, Color)>();
+
+  void DrawTextCodepoints(
+    Font font,
+    ffi.Pointer<ffi.Int32> codepoints,
+    int count,
+    Vector2 position,
+    double fontSize,
+    double spacing,
+    Color tint,
+  ) {
+    return _DrawTextCodepoints(
+      font,
+      codepoints,
+      count,
+      position,
+      fontSize,
+      spacing,
+      tint,
+    );
+  }
+
+  late final _DrawTextCodepointsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(Font, ffi.Pointer<ffi.Int32>, ffi.Int32, Vector2,
+              ffi.Float, ffi.Float, Color)>>('DrawTextCodepoints');
+  late final _DrawTextCodepoints = _DrawTextCodepointsPtr.asFunction<
+      void Function(
+          Font, ffi.Pointer<ffi.Int32>, int, Vector2, double, double, Color)>();
 
   /// Text font info functions
   int MeasureText(
@@ -6659,20 +6868,6 @@ class Raylib {
   late final _GenMeshTangents =
       _GenMeshTangentsPtr.asFunction<void Function(ffi.Pointer<Mesh>)>();
 
-  void GenMeshBinormals(
-    ffi.Pointer<Mesh> mesh,
-  ) {
-    return _GenMeshBinormals(
-      mesh,
-    );
-  }
-
-  late final _GenMeshBinormalsPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<Mesh>)>>(
-          'GenMeshBinormals');
-  late final _GenMeshBinormals =
-      _GenMeshBinormalsPtr.asFunction<void Function(ffi.Pointer<Mesh>)>();
-
   /// Mesh generation functions
   Mesh GenMeshPoly(
     int sides,
@@ -7135,22 +7330,6 @@ class Raylib {
   late final _GetRayCollisionBox = _GetRayCollisionBoxPtr.asFunction<
       RayCollision Function(Ray, BoundingBox)>();
 
-  RayCollision GetRayCollisionModel(
-    Ray ray,
-    Model model,
-  ) {
-    return _GetRayCollisionModel(
-      ray,
-      model,
-    );
-  }
-
-  late final _GetRayCollisionModelPtr =
-      _lookup<ffi.NativeFunction<RayCollision Function(Ray, Model)>>(
-          'GetRayCollisionModel');
-  late final _GetRayCollisionModel =
-      _GetRayCollisionModelPtr.asFunction<RayCollision Function(Ray, Model)>();
-
   RayCollision GetRayCollisionMesh(
     Ray ray,
     Mesh mesh,
@@ -7518,26 +7697,21 @@ class Raylib {
   late final _SetSoundPitch =
       _SetSoundPitchPtr.asFunction<void Function(Sound, double)>();
 
-  void WaveFormat(
-    ffi.Pointer<Wave> wave,
-    int sampleRate,
-    int sampleSize,
-    int channels,
+  void SetSoundPan(
+    Sound sound,
+    double pan,
   ) {
-    return _WaveFormat(
-      wave,
-      sampleRate,
-      sampleSize,
-      channels,
+    return _SetSoundPan(
+      sound,
+      pan,
     );
   }
 
-  late final _WaveFormatPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<Wave>, ffi.Int32, ffi.Int32,
-              ffi.Int32)>>('WaveFormat');
-  late final _WaveFormat = _WaveFormatPtr.asFunction<
-      void Function(ffi.Pointer<Wave>, int, int, int)>();
+  late final _SetSoundPanPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Sound, ffi.Float)>>(
+          'SetSoundPan');
+  late final _SetSoundPan =
+      _SetSoundPanPtr.asFunction<void Function(Sound, double)>();
 
   Wave WaveCopy(
     Wave wave,
@@ -7569,6 +7743,27 @@ class Raylib {
               ffi.Pointer<Wave>, ffi.Int32, ffi.Int32)>>('WaveCrop');
   late final _WaveCrop =
       _WaveCropPtr.asFunction<void Function(ffi.Pointer<Wave>, int, int)>();
+
+  void WaveFormat(
+    ffi.Pointer<Wave> wave,
+    int sampleRate,
+    int sampleSize,
+    int channels,
+  ) {
+    return _WaveFormat(
+      wave,
+      sampleRate,
+      sampleSize,
+      channels,
+    );
+  }
+
+  late final _WaveFormatPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<Wave>, ffi.Int32, ffi.Int32,
+              ffi.Int32)>>('WaveFormat');
+  late final _WaveFormat = _WaveFormatPtr.asFunction<
+      void Function(ffi.Pointer<Wave>, int, int, int)>();
 
   ffi.Pointer<ffi.Float> LoadWaveSamples(
     Wave wave,
@@ -7777,6 +7972,22 @@ class Raylib {
   late final _SetMusicPitch =
       _SetMusicPitchPtr.asFunction<void Function(Music, double)>();
 
+  void SetMusicPan(
+    Music music,
+    double pan,
+  ) {
+    return _SetMusicPan(
+      music,
+      pan,
+    );
+  }
+
+  late final _SetMusicPanPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Music, ffi.Float)>>(
+          'SetMusicPan');
+  late final _SetMusicPan =
+      _SetMusicPanPtr.asFunction<void Function(Music, double)>();
+
   double GetMusicTimeLength(
     Music music,
   ) {
@@ -7976,6 +8187,22 @@ class Raylib {
   late final _SetAudioStreamPitch =
       _SetAudioStreamPitchPtr.asFunction<void Function(AudioStream, double)>();
 
+  void SetAudioStreamPan(
+    AudioStream stream,
+    double pan,
+  ) {
+    return _SetAudioStreamPan(
+      stream,
+      pan,
+    );
+  }
+
+  late final _SetAudioStreamPanPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(AudioStream, ffi.Float)>>(
+          'SetAudioStreamPan');
+  late final _SetAudioStreamPan =
+      _SetAudioStreamPanPtr.asFunction<void Function(AudioStream, double)>();
+
   void SetAudioStreamBufferSizeDefault(
     int size,
   ) {
@@ -7989,7 +8216,4553 @@ class Raylib {
           'SetAudioStreamBufferSizeDefault');
   late final _SetAudioStreamBufferSizeDefault =
       _SetAudioStreamBufferSizeDefaultPtr.asFunction<void Function(int)>();
+
+  void SetAudioStreamCallback(
+    AudioStream stream,
+    AudioCallback callback,
+  ) {
+    return _SetAudioStreamCallback(
+      stream,
+      callback,
+    );
+  }
+
+  late final _SetAudioStreamCallbackPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(AudioStream, AudioCallback)>>(
+      'SetAudioStreamCallback');
+  late final _SetAudioStreamCallback = _SetAudioStreamCallbackPtr.asFunction<
+      void Function(AudioStream, AudioCallback)>();
+
+  void AttachAudioStreamProcessor(
+    AudioStream stream,
+    AudioCallback processor,
+  ) {
+    return _AttachAudioStreamProcessor(
+      stream,
+      processor,
+    );
+  }
+
+  late final _AttachAudioStreamProcessorPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(AudioStream, AudioCallback)>>(
+      'AttachAudioStreamProcessor');
+  late final _AttachAudioStreamProcessor = _AttachAudioStreamProcessorPtr
+      .asFunction<void Function(AudioStream, AudioCallback)>();
+
+  void DetachAudioStreamProcessor(
+    AudioStream stream,
+    AudioCallback processor,
+  ) {
+    return _DetachAudioStreamProcessor(
+      stream,
+      processor,
+    );
+  }
+
+  late final _DetachAudioStreamProcessorPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(AudioStream, AudioCallback)>>(
+      'DetachAudioStreamProcessor');
+  late final _DetachAudioStreamProcessor = _DetachAudioStreamProcessorPtr
+      .asFunction<void Function(AudioStream, AudioCallback)>();
+
+  void rlMatrixMode(
+    int mode,
+  ) {
+    return _rlMatrixMode(
+      mode,
+    );
+  }
+
+  late final _rlMatrixModePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>('rlMatrixMode');
+  late final _rlMatrixMode = _rlMatrixModePtr.asFunction<void Function(int)>();
+
+  void rlPushMatrix() {
+    return _rlPushMatrix();
+  }
+
+  late final _rlPushMatrixPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlPushMatrix');
+  late final _rlPushMatrix = _rlPushMatrixPtr.asFunction<void Function()>();
+
+  void rlPopMatrix() {
+    return _rlPopMatrix();
+  }
+
+  late final _rlPopMatrixPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlPopMatrix');
+  late final _rlPopMatrix = _rlPopMatrixPtr.asFunction<void Function()>();
+
+  void rlLoadIdentity() {
+    return _rlLoadIdentity();
+  }
+
+  late final _rlLoadIdentityPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlLoadIdentity');
+  late final _rlLoadIdentity = _rlLoadIdentityPtr.asFunction<void Function()>();
+
+  void rlTranslatef(
+    double x,
+    double y,
+    double z,
+  ) {
+    return _rlTranslatef(
+      x,
+      y,
+      z,
+    );
+  }
+
+  late final _rlTranslatefPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Float, ffi.Float, ffi.Float)>>('rlTranslatef');
+  late final _rlTranslatef =
+      _rlTranslatefPtr.asFunction<void Function(double, double, double)>();
+
+  void rlRotatef(
+    double angle,
+    double x,
+    double y,
+    double z,
+  ) {
+    return _rlRotatef(
+      angle,
+      x,
+      y,
+      z,
+    );
+  }
+
+  late final _rlRotatefPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Float, ffi.Float, ffi.Float, ffi.Float)>>('rlRotatef');
+  late final _rlRotatef =
+      _rlRotatefPtr.asFunction<void Function(double, double, double, double)>();
+
+  void rlScalef(
+    double x,
+    double y,
+    double z,
+  ) {
+    return _rlScalef(
+      x,
+      y,
+      z,
+    );
+  }
+
+  late final _rlScalefPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Float, ffi.Float, ffi.Float)>>('rlScalef');
+  late final _rlScalef =
+      _rlScalefPtr.asFunction<void Function(double, double, double)>();
+
+  void rlMultMatrixf(
+    ffi.Pointer<ffi.Float> matf,
+  ) {
+    return _rlMultMatrixf(
+      matf,
+    );
+  }
+
+  late final _rlMultMatrixfPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Float>)>>(
+          'rlMultMatrixf');
+  late final _rlMultMatrixf =
+      _rlMultMatrixfPtr.asFunction<void Function(ffi.Pointer<ffi.Float>)>();
+
+  void rlFrustum(
+    double left,
+    double right,
+    double bottom,
+    double top,
+    double znear,
+    double zfar,
+  ) {
+    return _rlFrustum(
+      left,
+      right,
+      bottom,
+      top,
+      znear,
+      zfar,
+    );
+  }
+
+  late final _rlFrustumPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Double, ffi.Double, ffi.Double, ffi.Double,
+              ffi.Double, ffi.Double)>>('rlFrustum');
+  late final _rlFrustum = _rlFrustumPtr.asFunction<
+      void Function(double, double, double, double, double, double)>();
+
+  void rlOrtho(
+    double left,
+    double right,
+    double bottom,
+    double top,
+    double znear,
+    double zfar,
+  ) {
+    return _rlOrtho(
+      left,
+      right,
+      bottom,
+      top,
+      znear,
+      zfar,
+    );
+  }
+
+  late final _rlOrthoPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Double, ffi.Double, ffi.Double, ffi.Double,
+              ffi.Double, ffi.Double)>>('rlOrtho');
+  late final _rlOrtho = _rlOrthoPtr.asFunction<
+      void Function(double, double, double, double, double, double)>();
+
+  void rlViewport(
+    int x,
+    int y,
+    int width,
+    int height,
+  ) {
+    return _rlViewport(
+      x,
+      y,
+      width,
+      height,
+    );
+  }
+
+  late final _rlViewportPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int32, ffi.Int32, ffi.Int32, ffi.Int32)>>('rlViewport');
+  late final _rlViewport =
+      _rlViewportPtr.asFunction<void Function(int, int, int, int)>();
+
+  /// ------------------------------------------------------------------------------------
+  /// Functions Declaration - Vertex level operations
+  /// ------------------------------------------------------------------------------------
+  void rlBegin(
+    int mode,
+  ) {
+    return _rlBegin(
+      mode,
+    );
+  }
+
+  late final _rlBeginPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>('rlBegin');
+  late final _rlBegin = _rlBeginPtr.asFunction<void Function(int)>();
+
+  void rlEnd() {
+    return _rlEnd();
+  }
+
+  late final _rlEndPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnd');
+  late final _rlEnd = _rlEndPtr.asFunction<void Function()>();
+
+  void rlVertex2i(
+    int x,
+    int y,
+  ) {
+    return _rlVertex2i(
+      x,
+      y,
+    );
+  }
+
+  late final _rlVertex2iPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32, ffi.Int32)>>(
+          'rlVertex2i');
+  late final _rlVertex2i = _rlVertex2iPtr.asFunction<void Function(int, int)>();
+
+  void rlVertex2f(
+    double x,
+    double y,
+  ) {
+    return _rlVertex2f(
+      x,
+      y,
+    );
+  }
+
+  late final _rlVertex2fPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Float, ffi.Float)>>(
+          'rlVertex2f');
+  late final _rlVertex2f =
+      _rlVertex2fPtr.asFunction<void Function(double, double)>();
+
+  void rlVertex3f(
+    double x,
+    double y,
+    double z,
+  ) {
+    return _rlVertex3f(
+      x,
+      y,
+      z,
+    );
+  }
+
+  late final _rlVertex3fPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Float, ffi.Float, ffi.Float)>>('rlVertex3f');
+  late final _rlVertex3f =
+      _rlVertex3fPtr.asFunction<void Function(double, double, double)>();
+
+  void rlTexCoord2f(
+    double x,
+    double y,
+  ) {
+    return _rlTexCoord2f(
+      x,
+      y,
+    );
+  }
+
+  late final _rlTexCoord2fPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Float, ffi.Float)>>(
+          'rlTexCoord2f');
+  late final _rlTexCoord2f =
+      _rlTexCoord2fPtr.asFunction<void Function(double, double)>();
+
+  void rlNormal3f(
+    double x,
+    double y,
+    double z,
+  ) {
+    return _rlNormal3f(
+      x,
+      y,
+      z,
+    );
+  }
+
+  late final _rlNormal3fPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Float, ffi.Float, ffi.Float)>>('rlNormal3f');
+  late final _rlNormal3f =
+      _rlNormal3fPtr.asFunction<void Function(double, double, double)>();
+
+  void rlColor4ub(
+    int r,
+    int g,
+    int b,
+    int a,
+  ) {
+    return _rlColor4ub(
+      r,
+      g,
+      b,
+      a,
+    );
+  }
+
+  late final _rlColor4ubPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Uint8, ffi.Uint8, ffi.Uint8, ffi.Uint8)>>('rlColor4ub');
+  late final _rlColor4ub =
+      _rlColor4ubPtr.asFunction<void Function(int, int, int, int)>();
+
+  void rlColor3f(
+    double x,
+    double y,
+    double z,
+  ) {
+    return _rlColor3f(
+      x,
+      y,
+      z,
+    );
+  }
+
+  late final _rlColor3fPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Float, ffi.Float, ffi.Float)>>('rlColor3f');
+  late final _rlColor3f =
+      _rlColor3fPtr.asFunction<void Function(double, double, double)>();
+
+  void rlColor4f(
+    double x,
+    double y,
+    double z,
+    double w,
+  ) {
+    return _rlColor4f(
+      x,
+      y,
+      z,
+      w,
+    );
+  }
+
+  late final _rlColor4fPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Float, ffi.Float, ffi.Float, ffi.Float)>>('rlColor4f');
+  late final _rlColor4f =
+      _rlColor4fPtr.asFunction<void Function(double, double, double, double)>();
+
+  /// Vertex buffers state
+  bool rlEnableVertexArray(
+    int vaoId,
+  ) {
+    return _rlEnableVertexArray(
+          vaoId,
+        ) !=
+        0;
+  }
+
+  late final _rlEnableVertexArrayPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint8 Function(ffi.Uint32)>>(
+          'rlEnableVertexArray');
+  late final _rlEnableVertexArray =
+      _rlEnableVertexArrayPtr.asFunction<int Function(int)>();
+
+  void rlDisableVertexArray() {
+    return _rlDisableVertexArray();
+  }
+
+  late final _rlDisableVertexArrayPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableVertexArray');
+  late final _rlDisableVertexArray =
+      _rlDisableVertexArrayPtr.asFunction<void Function()>();
+
+  void rlEnableVertexBuffer(
+    int id,
+  ) {
+    return _rlEnableVertexBuffer(
+      id,
+    );
+  }
+
+  late final _rlEnableVertexBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableVertexBuffer');
+  late final _rlEnableVertexBuffer =
+      _rlEnableVertexBufferPtr.asFunction<void Function(int)>();
+
+  void rlDisableVertexBuffer() {
+    return _rlDisableVertexBuffer();
+  }
+
+  late final _rlDisableVertexBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableVertexBuffer');
+  late final _rlDisableVertexBuffer =
+      _rlDisableVertexBufferPtr.asFunction<void Function()>();
+
+  void rlEnableVertexBufferElement(
+    int id,
+  ) {
+    return _rlEnableVertexBufferElement(
+      id,
+    );
+  }
+
+  late final _rlEnableVertexBufferElementPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableVertexBufferElement');
+  late final _rlEnableVertexBufferElement =
+      _rlEnableVertexBufferElementPtr.asFunction<void Function(int)>();
+
+  void rlDisableVertexBufferElement() {
+    return _rlDisableVertexBufferElement();
+  }
+
+  late final _rlDisableVertexBufferElementPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'rlDisableVertexBufferElement');
+  late final _rlDisableVertexBufferElement =
+      _rlDisableVertexBufferElementPtr.asFunction<void Function()>();
+
+  void rlEnableVertexAttribute(
+    int index,
+  ) {
+    return _rlEnableVertexAttribute(
+      index,
+    );
+  }
+
+  late final _rlEnableVertexAttributePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableVertexAttribute');
+  late final _rlEnableVertexAttribute =
+      _rlEnableVertexAttributePtr.asFunction<void Function(int)>();
+
+  void rlDisableVertexAttribute(
+    int index,
+  ) {
+    return _rlDisableVertexAttribute(
+      index,
+    );
+  }
+
+  late final _rlDisableVertexAttributePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlDisableVertexAttribute');
+  late final _rlDisableVertexAttribute =
+      _rlDisableVertexAttributePtr.asFunction<void Function(int)>();
+
+  /// Textures state
+  void rlActiveTextureSlot(
+    int slot,
+  ) {
+    return _rlActiveTextureSlot(
+      slot,
+    );
+  }
+
+  late final _rlActiveTextureSlotPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
+          'rlActiveTextureSlot');
+  late final _rlActiveTextureSlot =
+      _rlActiveTextureSlotPtr.asFunction<void Function(int)>();
+
+  void rlEnableTexture(
+    int id,
+  ) {
+    return _rlEnableTexture(
+      id,
+    );
+  }
+
+  late final _rlEnableTexturePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableTexture');
+  late final _rlEnableTexture =
+      _rlEnableTexturePtr.asFunction<void Function(int)>();
+
+  void rlDisableTexture() {
+    return _rlDisableTexture();
+  }
+
+  late final _rlDisableTexturePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableTexture');
+  late final _rlDisableTexture =
+      _rlDisableTexturePtr.asFunction<void Function()>();
+
+  void rlEnableTextureCubemap(
+    int id,
+  ) {
+    return _rlEnableTextureCubemap(
+      id,
+    );
+  }
+
+  late final _rlEnableTextureCubemapPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableTextureCubemap');
+  late final _rlEnableTextureCubemap =
+      _rlEnableTextureCubemapPtr.asFunction<void Function(int)>();
+
+  void rlDisableTextureCubemap() {
+    return _rlDisableTextureCubemap();
+  }
+
+  late final _rlDisableTextureCubemapPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'rlDisableTextureCubemap');
+  late final _rlDisableTextureCubemap =
+      _rlDisableTextureCubemapPtr.asFunction<void Function()>();
+
+  void rlTextureParameters(
+    int id,
+    int param,
+    int value,
+  ) {
+    return _rlTextureParameters(
+      id,
+      param,
+      value,
+    );
+  }
+
+  late final _rlTextureParametersPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Uint32, ffi.Int32, ffi.Int32)>>('rlTextureParameters');
+  late final _rlTextureParameters =
+      _rlTextureParametersPtr.asFunction<void Function(int, int, int)>();
+
+  /// Shader state
+  void rlEnableShader(
+    int id,
+  ) {
+    return _rlEnableShader(
+      id,
+    );
+  }
+
+  late final _rlEnableShaderPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableShader');
+  late final _rlEnableShader =
+      _rlEnableShaderPtr.asFunction<void Function(int)>();
+
+  void rlDisableShader() {
+    return _rlDisableShader();
+  }
+
+  late final _rlDisableShaderPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableShader');
+  late final _rlDisableShader =
+      _rlDisableShaderPtr.asFunction<void Function()>();
+
+  /// Framebuffer state
+  void rlEnableFramebuffer(
+    int id,
+  ) {
+    return _rlEnableFramebuffer(
+      id,
+    );
+  }
+
+  late final _rlEnableFramebufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlEnableFramebuffer');
+  late final _rlEnableFramebuffer =
+      _rlEnableFramebufferPtr.asFunction<void Function(int)>();
+
+  void rlDisableFramebuffer() {
+    return _rlDisableFramebuffer();
+  }
+
+  late final _rlDisableFramebufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableFramebuffer');
+  late final _rlDisableFramebuffer =
+      _rlDisableFramebufferPtr.asFunction<void Function()>();
+
+  void rlActiveDrawBuffers(
+    int count,
+  ) {
+    return _rlActiveDrawBuffers(
+      count,
+    );
+  }
+
+  late final _rlActiveDrawBuffersPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
+          'rlActiveDrawBuffers');
+  late final _rlActiveDrawBuffers =
+      _rlActiveDrawBuffersPtr.asFunction<void Function(int)>();
+
+  /// General render state
+  void rlEnableColorBlend() {
+    return _rlEnableColorBlend();
+  }
+
+  late final _rlEnableColorBlendPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableColorBlend');
+  late final _rlEnableColorBlend =
+      _rlEnableColorBlendPtr.asFunction<void Function()>();
+
+  void rlDisableColorBlend() {
+    return _rlDisableColorBlend();
+  }
+
+  late final _rlDisableColorBlendPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableColorBlend');
+  late final _rlDisableColorBlend =
+      _rlDisableColorBlendPtr.asFunction<void Function()>();
+
+  void rlEnableDepthTest() {
+    return _rlEnableDepthTest();
+  }
+
+  late final _rlEnableDepthTestPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableDepthTest');
+  late final _rlEnableDepthTest =
+      _rlEnableDepthTestPtr.asFunction<void Function()>();
+
+  void rlDisableDepthTest() {
+    return _rlDisableDepthTest();
+  }
+
+  late final _rlDisableDepthTestPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableDepthTest');
+  late final _rlDisableDepthTest =
+      _rlDisableDepthTestPtr.asFunction<void Function()>();
+
+  void rlEnableDepthMask() {
+    return _rlEnableDepthMask();
+  }
+
+  late final _rlEnableDepthMaskPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableDepthMask');
+  late final _rlEnableDepthMask =
+      _rlEnableDepthMaskPtr.asFunction<void Function()>();
+
+  void rlDisableDepthMask() {
+    return _rlDisableDepthMask();
+  }
+
+  late final _rlDisableDepthMaskPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableDepthMask');
+  late final _rlDisableDepthMask =
+      _rlDisableDepthMaskPtr.asFunction<void Function()>();
+
+  void rlEnableBackfaceCulling() {
+    return _rlEnableBackfaceCulling();
+  }
+
+  late final _rlEnableBackfaceCullingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'rlEnableBackfaceCulling');
+  late final _rlEnableBackfaceCulling =
+      _rlEnableBackfaceCullingPtr.asFunction<void Function()>();
+
+  void rlDisableBackfaceCulling() {
+    return _rlDisableBackfaceCulling();
+  }
+
+  late final _rlDisableBackfaceCullingPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'rlDisableBackfaceCulling');
+  late final _rlDisableBackfaceCulling =
+      _rlDisableBackfaceCullingPtr.asFunction<void Function()>();
+
+  void rlEnableScissorTest() {
+    return _rlEnableScissorTest();
+  }
+
+  late final _rlEnableScissorTestPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableScissorTest');
+  late final _rlEnableScissorTest =
+      _rlEnableScissorTestPtr.asFunction<void Function()>();
+
+  void rlDisableScissorTest() {
+    return _rlDisableScissorTest();
+  }
+
+  late final _rlDisableScissorTestPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableScissorTest');
+  late final _rlDisableScissorTest =
+      _rlDisableScissorTestPtr.asFunction<void Function()>();
+
+  void rlScissor(
+    int x,
+    int y,
+    int width,
+    int height,
+  ) {
+    return _rlScissor(
+      x,
+      y,
+      width,
+      height,
+    );
+  }
+
+  late final _rlScissorPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int32, ffi.Int32, ffi.Int32, ffi.Int32)>>('rlScissor');
+  late final _rlScissor =
+      _rlScissorPtr.asFunction<void Function(int, int, int, int)>();
+
+  void rlEnableWireMode() {
+    return _rlEnableWireMode();
+  }
+
+  late final _rlEnableWireModePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableWireMode');
+  late final _rlEnableWireMode =
+      _rlEnableWireModePtr.asFunction<void Function()>();
+
+  void rlDisableWireMode() {
+    return _rlDisableWireMode();
+  }
+
+  late final _rlDisableWireModePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableWireMode');
+  late final _rlDisableWireMode =
+      _rlDisableWireModePtr.asFunction<void Function()>();
+
+  void rlSetLineWidth(
+    double width,
+  ) {
+    return _rlSetLineWidth(
+      width,
+    );
+  }
+
+  late final _rlSetLineWidthPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Float)>>(
+          'rlSetLineWidth');
+  late final _rlSetLineWidth =
+      _rlSetLineWidthPtr.asFunction<void Function(double)>();
+
+  double rlGetLineWidth() {
+    return _rlGetLineWidth();
+  }
+
+  late final _rlGetLineWidthPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function()>>('rlGetLineWidth');
+  late final _rlGetLineWidth =
+      _rlGetLineWidthPtr.asFunction<double Function()>();
+
+  void rlEnableSmoothLines() {
+    return _rlEnableSmoothLines();
+  }
+
+  late final _rlEnableSmoothLinesPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableSmoothLines');
+  late final _rlEnableSmoothLines =
+      _rlEnableSmoothLinesPtr.asFunction<void Function()>();
+
+  void rlDisableSmoothLines() {
+    return _rlDisableSmoothLines();
+  }
+
+  late final _rlDisableSmoothLinesPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableSmoothLines');
+  late final _rlDisableSmoothLines =
+      _rlDisableSmoothLinesPtr.asFunction<void Function()>();
+
+  void rlEnableStereoRender() {
+    return _rlEnableStereoRender();
+  }
+
+  late final _rlEnableStereoRenderPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlEnableStereoRender');
+  late final _rlEnableStereoRender =
+      _rlEnableStereoRenderPtr.asFunction<void Function()>();
+
+  void rlDisableStereoRender() {
+    return _rlDisableStereoRender();
+  }
+
+  late final _rlDisableStereoRenderPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlDisableStereoRender');
+  late final _rlDisableStereoRender =
+      _rlDisableStereoRenderPtr.asFunction<void Function()>();
+
+  bool rlIsStereoRenderEnabled() {
+    return _rlIsStereoRenderEnabled() != 0;
+  }
+
+  late final _rlIsStereoRenderEnabledPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint8 Function()>>(
+          'rlIsStereoRenderEnabled');
+  late final _rlIsStereoRenderEnabled =
+      _rlIsStereoRenderEnabledPtr.asFunction<int Function()>();
+
+  void rlClearColor(
+    int r,
+    int g,
+    int b,
+    int a,
+  ) {
+    return _rlClearColor(
+      r,
+      g,
+      b,
+      a,
+    );
+  }
+
+  late final _rlClearColorPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Uint8, ffi.Uint8, ffi.Uint8, ffi.Uint8)>>('rlClearColor');
+  late final _rlClearColor =
+      _rlClearColorPtr.asFunction<void Function(int, int, int, int)>();
+
+  void rlClearScreenBuffers() {
+    return _rlClearScreenBuffers();
+  }
+
+  late final _rlClearScreenBuffersPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlClearScreenBuffers');
+  late final _rlClearScreenBuffers =
+      _rlClearScreenBuffersPtr.asFunction<void Function()>();
+
+  void rlCheckErrors() {
+    return _rlCheckErrors();
+  }
+
+  late final _rlCheckErrorsPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlCheckErrors');
+  late final _rlCheckErrors = _rlCheckErrorsPtr.asFunction<void Function()>();
+
+  void rlSetBlendMode(
+    int mode,
+  ) {
+    return _rlSetBlendMode(
+      mode,
+    );
+  }
+
+  late final _rlSetBlendModePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
+          'rlSetBlendMode');
+  late final _rlSetBlendMode =
+      _rlSetBlendModePtr.asFunction<void Function(int)>();
+
+  void rlSetBlendFactors(
+    int glSrcFactor,
+    int glDstFactor,
+    int glEquation,
+  ) {
+    return _rlSetBlendFactors(
+      glSrcFactor,
+      glDstFactor,
+      glEquation,
+    );
+  }
+
+  late final _rlSetBlendFactorsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int32, ffi.Int32, ffi.Int32)>>('rlSetBlendFactors');
+  late final _rlSetBlendFactors =
+      _rlSetBlendFactorsPtr.asFunction<void Function(int, int, int)>();
+
+  /// ------------------------------------------------------------------------------------
+  /// Functions Declaration - rlgl functionality
+  /// ------------------------------------------------------------------------------------
+  /// rlgl initialization functions
+  void rlglInit(
+    int width,
+    int height,
+  ) {
+    return _rlglInit(
+      width,
+      height,
+    );
+  }
+
+  late final _rlglInitPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32, ffi.Int32)>>(
+          'rlglInit');
+  late final _rlglInit = _rlglInitPtr.asFunction<void Function(int, int)>();
+
+  void rlglClose() {
+    return _rlglClose();
+  }
+
+  late final _rlglClosePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlglClose');
+  late final _rlglClose = _rlglClosePtr.asFunction<void Function()>();
+
+  void rlLoadExtensions(
+    ffi.Pointer<ffi.Void> loader,
+  ) {
+    return _rlLoadExtensions(
+      loader,
+    );
+  }
+
+  late final _rlLoadExtensionsPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'rlLoadExtensions');
+  late final _rlLoadExtensions =
+      _rlLoadExtensionsPtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  int rlGetVersion() {
+    return _rlGetVersion();
+  }
+
+  late final _rlGetVersionPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>('rlGetVersion');
+  late final _rlGetVersion = _rlGetVersionPtr.asFunction<int Function()>();
+
+  void rlSetFramebufferWidth(
+    int width,
+  ) {
+    return _rlSetFramebufferWidth(
+      width,
+    );
+  }
+
+  late final _rlSetFramebufferWidthPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
+          'rlSetFramebufferWidth');
+  late final _rlSetFramebufferWidth =
+      _rlSetFramebufferWidthPtr.asFunction<void Function(int)>();
+
+  int rlGetFramebufferWidth() {
+    return _rlGetFramebufferWidth();
+  }
+
+  late final _rlGetFramebufferWidthPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>(
+          'rlGetFramebufferWidth');
+  late final _rlGetFramebufferWidth =
+      _rlGetFramebufferWidthPtr.asFunction<int Function()>();
+
+  void rlSetFramebufferHeight(
+    int height,
+  ) {
+    return _rlSetFramebufferHeight(
+      height,
+    );
+  }
+
+  late final _rlSetFramebufferHeightPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>(
+          'rlSetFramebufferHeight');
+  late final _rlSetFramebufferHeight =
+      _rlSetFramebufferHeightPtr.asFunction<void Function(int)>();
+
+  int rlGetFramebufferHeight() {
+    return _rlGetFramebufferHeight();
+  }
+
+  late final _rlGetFramebufferHeightPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>(
+          'rlGetFramebufferHeight');
+  late final _rlGetFramebufferHeight =
+      _rlGetFramebufferHeightPtr.asFunction<int Function()>();
+
+  int rlGetTextureIdDefault() {
+    return _rlGetTextureIdDefault();
+  }
+
+  late final _rlGetTextureIdDefaultPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function()>>(
+          'rlGetTextureIdDefault');
+  late final _rlGetTextureIdDefault =
+      _rlGetTextureIdDefaultPtr.asFunction<int Function()>();
+
+  int rlGetShaderIdDefault() {
+    return _rlGetShaderIdDefault();
+  }
+
+  late final _rlGetShaderIdDefaultPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function()>>(
+          'rlGetShaderIdDefault');
+  late final _rlGetShaderIdDefault =
+      _rlGetShaderIdDefaultPtr.asFunction<int Function()>();
+
+  ffi.Pointer<ffi.Int32> rlGetShaderLocsDefault() {
+    return _rlGetShaderLocsDefault();
+  }
+
+  late final _rlGetShaderLocsDefaultPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int32> Function()>>(
+          'rlGetShaderLocsDefault');
+  late final _rlGetShaderLocsDefault = _rlGetShaderLocsDefaultPtr
+      .asFunction<ffi.Pointer<ffi.Int32> Function()>();
+
+  /// Render batch management
+  /// NOTE: rlgl provides a default render batch to behave like OpenGL 1.1 immediate mode
+  /// but this render batch API is exposed in case of custom batches are required
+  rlRenderBatch rlLoadRenderBatch(
+    int numBuffers,
+    int bufferElements,
+  ) {
+    return _rlLoadRenderBatch(
+      numBuffers,
+      bufferElements,
+    );
+  }
+
+  late final _rlLoadRenderBatchPtr =
+      _lookup<ffi.NativeFunction<rlRenderBatch Function(ffi.Int32, ffi.Int32)>>(
+          'rlLoadRenderBatch');
+  late final _rlLoadRenderBatch =
+      _rlLoadRenderBatchPtr.asFunction<rlRenderBatch Function(int, int)>();
+
+  void rlUnloadRenderBatch(
+    rlRenderBatch batch,
+  ) {
+    return _rlUnloadRenderBatch(
+      batch,
+    );
+  }
+
+  late final _rlUnloadRenderBatchPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(rlRenderBatch)>>(
+          'rlUnloadRenderBatch');
+  late final _rlUnloadRenderBatch =
+      _rlUnloadRenderBatchPtr.asFunction<void Function(rlRenderBatch)>();
+
+  void rlDrawRenderBatch(
+    ffi.Pointer<rlRenderBatch> batch,
+  ) {
+    return _rlDrawRenderBatch(
+      batch,
+    );
+  }
+
+  late final _rlDrawRenderBatchPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rlRenderBatch>)>>(
+      'rlDrawRenderBatch');
+  late final _rlDrawRenderBatch = _rlDrawRenderBatchPtr
+      .asFunction<void Function(ffi.Pointer<rlRenderBatch>)>();
+
+  void rlSetRenderBatchActive(
+    ffi.Pointer<rlRenderBatch> batch,
+  ) {
+    return _rlSetRenderBatchActive(
+      batch,
+    );
+  }
+
+  late final _rlSetRenderBatchActivePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rlRenderBatch>)>>(
+      'rlSetRenderBatchActive');
+  late final _rlSetRenderBatchActive = _rlSetRenderBatchActivePtr
+      .asFunction<void Function(ffi.Pointer<rlRenderBatch>)>();
+
+  void rlDrawRenderBatchActive() {
+    return _rlDrawRenderBatchActive();
+  }
+
+  late final _rlDrawRenderBatchActivePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'rlDrawRenderBatchActive');
+  late final _rlDrawRenderBatchActive =
+      _rlDrawRenderBatchActivePtr.asFunction<void Function()>();
+
+  bool rlCheckRenderBatchLimit(
+    int vCount,
+  ) {
+    return _rlCheckRenderBatchLimit(
+          vCount,
+        ) !=
+        0;
+  }
+
+  late final _rlCheckRenderBatchLimitPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint8 Function(ffi.Int32)>>(
+          'rlCheckRenderBatchLimit');
+  late final _rlCheckRenderBatchLimit =
+      _rlCheckRenderBatchLimitPtr.asFunction<int Function(int)>();
+
+  void rlSetTexture(
+    int id,
+  ) {
+    return _rlSetTexture(
+      id,
+    );
+  }
+
+  late final _rlSetTexturePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlSetTexture');
+  late final _rlSetTexture = _rlSetTexturePtr.asFunction<void Function(int)>();
+
+  /// Vertex buffers management
+  int rlLoadVertexArray() {
+    return _rlLoadVertexArray();
+  }
+
+  late final _rlLoadVertexArrayPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function()>>('rlLoadVertexArray');
+  late final _rlLoadVertexArray =
+      _rlLoadVertexArrayPtr.asFunction<int Function()>();
+
+  int rlLoadVertexBuffer(
+    ffi.Pointer<ffi.Void> buffer,
+    int size,
+    bool dynamic1,
+  ) {
+    return _rlLoadVertexBuffer(
+      buffer,
+      size,
+      dynamic1 ? 1 : 0,
+    );
+  }
+
+  late final _rlLoadVertexBufferPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Uint8)>>('rlLoadVertexBuffer');
+  late final _rlLoadVertexBuffer = _rlLoadVertexBufferPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  int rlLoadVertexBufferElement(
+    ffi.Pointer<ffi.Void> buffer,
+    int size,
+    bool dynamic1,
+  ) {
+    return _rlLoadVertexBufferElement(
+      buffer,
+      size,
+      dynamic1 ? 1 : 0,
+    );
+  }
+
+  late final _rlLoadVertexBufferElementPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Uint8)>>('rlLoadVertexBufferElement');
+  late final _rlLoadVertexBufferElement = _rlLoadVertexBufferElementPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlUpdateVertexBuffer(
+    int bufferId,
+    ffi.Pointer<ffi.Void> data,
+    int dataSize,
+    int offset,
+  ) {
+    return _rlUpdateVertexBuffer(
+      bufferId,
+      data,
+      dataSize,
+      offset,
+    );
+  }
+
+  late final _rlUpdateVertexBufferPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Int32)>>('rlUpdateVertexBuffer');
+  late final _rlUpdateVertexBuffer = _rlUpdateVertexBufferPtr
+      .asFunction<void Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlUpdateVertexBufferElements(
+    int id,
+    ffi.Pointer<ffi.Void> data,
+    int dataSize,
+    int offset,
+  ) {
+    return _rlUpdateVertexBufferElements(
+      id,
+      data,
+      dataSize,
+      offset,
+    );
+  }
+
+  late final _rlUpdateVertexBufferElementsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Int32)>>('rlUpdateVertexBufferElements');
+  late final _rlUpdateVertexBufferElements = _rlUpdateVertexBufferElementsPtr
+      .asFunction<void Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlUnloadVertexArray(
+    int vaoId,
+  ) {
+    return _rlUnloadVertexArray(
+      vaoId,
+    );
+  }
+
+  late final _rlUnloadVertexArrayPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlUnloadVertexArray');
+  late final _rlUnloadVertexArray =
+      _rlUnloadVertexArrayPtr.asFunction<void Function(int)>();
+
+  void rlUnloadVertexBuffer(
+    int vboId,
+  ) {
+    return _rlUnloadVertexBuffer(
+      vboId,
+    );
+  }
+
+  late final _rlUnloadVertexBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlUnloadVertexBuffer');
+  late final _rlUnloadVertexBuffer =
+      _rlUnloadVertexBufferPtr.asFunction<void Function(int)>();
+
+  void rlSetVertexAttribute(
+    int index,
+    int compSize,
+    int type,
+    bool normalized,
+    int stride,
+    ffi.Pointer<ffi.Void> pointer,
+  ) {
+    return _rlSetVertexAttribute(
+      index,
+      compSize,
+      type,
+      normalized ? 1 : 0,
+      stride,
+      pointer,
+    );
+  }
+
+  late final _rlSetVertexAttributePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Int32, ffi.Int32, ffi.Uint8,
+              ffi.Int32, ffi.Pointer<ffi.Void>)>>('rlSetVertexAttribute');
+  late final _rlSetVertexAttribute = _rlSetVertexAttributePtr.asFunction<
+      void Function(int, int, int, int, int, ffi.Pointer<ffi.Void>)>();
+
+  void rlSetVertexAttributeDivisor(
+    int index,
+    int divisor,
+  ) {
+    return _rlSetVertexAttributeDivisor(
+      index,
+      divisor,
+    );
+  }
+
+  late final _rlSetVertexAttributeDivisorPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32, ffi.Int32)>>(
+          'rlSetVertexAttributeDivisor');
+  late final _rlSetVertexAttributeDivisor =
+      _rlSetVertexAttributeDivisorPtr.asFunction<void Function(int, int)>();
+
+  void rlSetVertexAttributeDefault(
+    int locIndex,
+    ffi.Pointer<ffi.Void> value,
+    int attribType,
+    int count,
+  ) {
+    return _rlSetVertexAttributeDefault(
+      locIndex,
+      value,
+      attribType,
+      count,
+    );
+  }
+
+  late final _rlSetVertexAttributeDefaultPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Int32)>>('rlSetVertexAttributeDefault');
+  late final _rlSetVertexAttributeDefault = _rlSetVertexAttributeDefaultPtr
+      .asFunction<void Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlDrawVertexArray(
+    int offset,
+    int count,
+  ) {
+    return _rlDrawVertexArray(
+      offset,
+      count,
+    );
+  }
+
+  late final _rlDrawVertexArrayPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32, ffi.Int32)>>(
+          'rlDrawVertexArray');
+  late final _rlDrawVertexArray =
+      _rlDrawVertexArrayPtr.asFunction<void Function(int, int)>();
+
+  void rlDrawVertexArrayElements(
+    int offset,
+    int count,
+    ffi.Pointer<ffi.Void> buffer,
+  ) {
+    return _rlDrawVertexArrayElements(
+      offset,
+      count,
+      buffer,
+    );
+  }
+
+  late final _rlDrawVertexArrayElementsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Int32, ffi.Int32,
+              ffi.Pointer<ffi.Void>)>>('rlDrawVertexArrayElements');
+  late final _rlDrawVertexArrayElements = _rlDrawVertexArrayElementsPtr
+      .asFunction<void Function(int, int, ffi.Pointer<ffi.Void>)>();
+
+  void rlDrawVertexArrayInstanced(
+    int offset,
+    int count,
+    int instances,
+  ) {
+    return _rlDrawVertexArrayInstanced(
+      offset,
+      count,
+      instances,
+    );
+  }
+
+  late final _rlDrawVertexArrayInstancedPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int32, ffi.Int32, ffi.Int32)>>('rlDrawVertexArrayInstanced');
+  late final _rlDrawVertexArrayInstanced =
+      _rlDrawVertexArrayInstancedPtr.asFunction<void Function(int, int, int)>();
+
+  void rlDrawVertexArrayElementsInstanced(
+    int offset,
+    int count,
+    ffi.Pointer<ffi.Void> buffer,
+    int instances,
+  ) {
+    return _rlDrawVertexArrayElementsInstanced(
+      offset,
+      count,
+      buffer,
+      instances,
+    );
+  }
+
+  late final _rlDrawVertexArrayElementsInstancedPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Int32, ffi.Int32, ffi.Pointer<ffi.Void>,
+              ffi.Int32)>>('rlDrawVertexArrayElementsInstanced');
+  late final _rlDrawVertexArrayElementsInstanced =
+      _rlDrawVertexArrayElementsInstancedPtr
+          .asFunction<void Function(int, int, ffi.Pointer<ffi.Void>, int)>();
+
+  /// Textures management
+  int rlLoadTexture(
+    ffi.Pointer<ffi.Void> data,
+    int width,
+    int height,
+    int format,
+    int mipmapCount,
+  ) {
+    return _rlLoadTexture(
+      data,
+      width,
+      height,
+      format,
+      mipmapCount,
+    );
+  }
+
+  late final _rlLoadTexturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(ffi.Pointer<ffi.Void>, ffi.Int32, ffi.Int32,
+              ffi.Int32, ffi.Int32)>>('rlLoadTexture');
+  late final _rlLoadTexture = _rlLoadTexturePtr
+      .asFunction<int Function(ffi.Pointer<ffi.Void>, int, int, int, int)>();
+
+  int rlLoadTextureDepth(
+    int width,
+    int height,
+    bool useRenderBuffer,
+  ) {
+    return _rlLoadTextureDepth(
+      width,
+      height,
+      useRenderBuffer ? 1 : 0,
+    );
+  }
+
+  late final _rlLoadTextureDepthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(
+              ffi.Int32, ffi.Int32, ffi.Uint8)>>('rlLoadTextureDepth');
+  late final _rlLoadTextureDepth =
+      _rlLoadTextureDepthPtr.asFunction<int Function(int, int, int)>();
+
+  int rlLoadTextureCubemap(
+    ffi.Pointer<ffi.Void> data,
+    int size,
+    int format,
+  ) {
+    return _rlLoadTextureCubemap(
+      data,
+      size,
+      format,
+    );
+  }
+
+  late final _rlLoadTextureCubemapPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Int32)>>('rlLoadTextureCubemap');
+  late final _rlLoadTextureCubemap = _rlLoadTextureCubemapPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlUpdateTexture(
+    int id,
+    int offsetX,
+    int offsetY,
+    int width,
+    int height,
+    int format,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _rlUpdateTexture(
+      id,
+      offsetX,
+      offsetY,
+      width,
+      height,
+      format,
+      data,
+    );
+  }
+
+  late final _rlUpdateTexturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Int32, ffi.Int32, ffi.Int32,
+              ffi.Int32, ffi.Int32, ffi.Pointer<ffi.Void>)>>('rlUpdateTexture');
+  late final _rlUpdateTexture = _rlUpdateTexturePtr.asFunction<
+      void Function(int, int, int, int, int, int, ffi.Pointer<ffi.Void>)>();
+
+  void rlGetGlTextureFormats(
+    int format,
+    ffi.Pointer<ffi.Uint32> glInternalFormat,
+    ffi.Pointer<ffi.Uint32> glFormat,
+    ffi.Pointer<ffi.Uint32> glType,
+  ) {
+    return _rlGetGlTextureFormats(
+      format,
+      glInternalFormat,
+      glFormat,
+      glType,
+    );
+  }
+
+  late final _rlGetGlTextureFormatsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int32,
+              ffi.Pointer<ffi.Uint32>,
+              ffi.Pointer<ffi.Uint32>,
+              ffi.Pointer<ffi.Uint32>)>>('rlGetGlTextureFormats');
+  late final _rlGetGlTextureFormats = _rlGetGlTextureFormatsPtr.asFunction<
+      void Function(int, ffi.Pointer<ffi.Uint32>, ffi.Pointer<ffi.Uint32>,
+          ffi.Pointer<ffi.Uint32>)>();
+
+  ffi.Pointer<ffi.Int8> rlGetPixelFormatName(
+    int format,
+  ) {
+    return _rlGetPixelFormatName(
+      format,
+    );
+  }
+
+  late final _rlGetPixelFormatNamePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int8> Function(ffi.Uint32)>>(
+          'rlGetPixelFormatName');
+  late final _rlGetPixelFormatName = _rlGetPixelFormatNamePtr
+      .asFunction<ffi.Pointer<ffi.Int8> Function(int)>();
+
+  void rlUnloadTexture(
+    int id,
+  ) {
+    return _rlUnloadTexture(
+      id,
+    );
+  }
+
+  late final _rlUnloadTexturePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlUnloadTexture');
+  late final _rlUnloadTexture =
+      _rlUnloadTexturePtr.asFunction<void Function(int)>();
+
+  void rlGenTextureMipmaps(
+    int id,
+    int width,
+    int height,
+    int format,
+    ffi.Pointer<ffi.Int32> mipmaps,
+  ) {
+    return _rlGenTextureMipmaps(
+      id,
+      width,
+      height,
+      format,
+      mipmaps,
+    );
+  }
+
+  late final _rlGenTextureMipmapsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Int32, ffi.Int32, ffi.Int32,
+              ffi.Pointer<ffi.Int32>)>>('rlGenTextureMipmaps');
+  late final _rlGenTextureMipmaps = _rlGenTextureMipmapsPtr
+      .asFunction<void Function(int, int, int, int, ffi.Pointer<ffi.Int32>)>();
+
+  ffi.Pointer<ffi.Void> rlReadTexturePixels(
+    int id,
+    int width,
+    int height,
+    int format,
+  ) {
+    return _rlReadTexturePixels(
+      id,
+      width,
+      height,
+      format,
+    );
+  }
+
+  late final _rlReadTexturePixelsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Uint32, ffi.Int32, ffi.Int32,
+              ffi.Int32)>>('rlReadTexturePixels');
+  late final _rlReadTexturePixels = _rlReadTexturePixelsPtr
+      .asFunction<ffi.Pointer<ffi.Void> Function(int, int, int, int)>();
+
+  ffi.Pointer<ffi.Uint8> rlReadScreenPixels(
+    int width,
+    int height,
+  ) {
+    return _rlReadScreenPixels(
+      width,
+      height,
+    );
+  }
+
+  late final _rlReadScreenPixelsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Uint8> Function(
+              ffi.Int32, ffi.Int32)>>('rlReadScreenPixels');
+  late final _rlReadScreenPixels = _rlReadScreenPixelsPtr
+      .asFunction<ffi.Pointer<ffi.Uint8> Function(int, int)>();
+
+  /// Framebuffer management (fbo)
+  int rlLoadFramebuffer(
+    int width,
+    int height,
+  ) {
+    return _rlLoadFramebuffer(
+      width,
+      height,
+    );
+  }
+
+  late final _rlLoadFramebufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function(ffi.Int32, ffi.Int32)>>(
+          'rlLoadFramebuffer');
+  late final _rlLoadFramebuffer =
+      _rlLoadFramebufferPtr.asFunction<int Function(int, int)>();
+
+  void rlFramebufferAttach(
+    int fboId,
+    int texId,
+    int attachType,
+    int texType,
+    int mipLevel,
+  ) {
+    return _rlFramebufferAttach(
+      fboId,
+      texId,
+      attachType,
+      texType,
+      mipLevel,
+    );
+  }
+
+  late final _rlFramebufferAttachPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Uint32, ffi.Int32, ffi.Int32,
+              ffi.Int32)>>('rlFramebufferAttach');
+  late final _rlFramebufferAttach = _rlFramebufferAttachPtr
+      .asFunction<void Function(int, int, int, int, int)>();
+
+  bool rlFramebufferComplete(
+    int id,
+  ) {
+    return _rlFramebufferComplete(
+          id,
+        ) !=
+        0;
+  }
+
+  late final _rlFramebufferCompletePtr =
+      _lookup<ffi.NativeFunction<ffi.Uint8 Function(ffi.Uint32)>>(
+          'rlFramebufferComplete');
+  late final _rlFramebufferComplete =
+      _rlFramebufferCompletePtr.asFunction<int Function(int)>();
+
+  void rlUnloadFramebuffer(
+    int id,
+  ) {
+    return _rlUnloadFramebuffer(
+      id,
+    );
+  }
+
+  late final _rlUnloadFramebufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlUnloadFramebuffer');
+  late final _rlUnloadFramebuffer =
+      _rlUnloadFramebufferPtr.asFunction<void Function(int)>();
+
+  /// Shaders management
+  int rlLoadShaderCode(
+    ffi.Pointer<ffi.Int8> vsCode,
+    ffi.Pointer<ffi.Int8> fsCode,
+  ) {
+    return _rlLoadShaderCode(
+      vsCode,
+      fsCode,
+    );
+  }
+
+  late final _rlLoadShaderCodePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(ffi.Pointer<ffi.Int8>,
+              ffi.Pointer<ffi.Int8>)>>('rlLoadShaderCode');
+  late final _rlLoadShaderCode = _rlLoadShaderCodePtr
+      .asFunction<int Function(ffi.Pointer<ffi.Int8>, ffi.Pointer<ffi.Int8>)>();
+
+  int rlCompileShader(
+    ffi.Pointer<ffi.Int8> shaderCode,
+    int type,
+  ) {
+    return _rlCompileShader(
+      shaderCode,
+      type,
+    );
+  }
+
+  late final _rlCompileShaderPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(
+              ffi.Pointer<ffi.Int8>, ffi.Int32)>>('rlCompileShader');
+  late final _rlCompileShader = _rlCompileShaderPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Int8>, int)>();
+
+  int rlLoadShaderProgram(
+    int vShaderId,
+    int fShaderId,
+  ) {
+    return _rlLoadShaderProgram(
+      vShaderId,
+      fShaderId,
+    );
+  }
+
+  late final _rlLoadShaderProgramPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function(ffi.Uint32, ffi.Uint32)>>(
+          'rlLoadShaderProgram');
+  late final _rlLoadShaderProgram =
+      _rlLoadShaderProgramPtr.asFunction<int Function(int, int)>();
+
+  void rlUnloadShaderProgram(
+    int id,
+  ) {
+    return _rlUnloadShaderProgram(
+      id,
+    );
+  }
+
+  late final _rlUnloadShaderProgramPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlUnloadShaderProgram');
+  late final _rlUnloadShaderProgram =
+      _rlUnloadShaderProgramPtr.asFunction<void Function(int)>();
+
+  int rlGetLocationUniform(
+    int shaderId,
+    ffi.Pointer<ffi.Int8> uniformName,
+  ) {
+    return _rlGetLocationUniform(
+      shaderId,
+      uniformName,
+    );
+  }
+
+  late final _rlGetLocationUniformPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Uint32, ffi.Pointer<ffi.Int8>)>>('rlGetLocationUniform');
+  late final _rlGetLocationUniform = _rlGetLocationUniformPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Int8>)>();
+
+  int rlGetLocationAttrib(
+    int shaderId,
+    ffi.Pointer<ffi.Int8> attribName,
+  ) {
+    return _rlGetLocationAttrib(
+      shaderId,
+      attribName,
+    );
+  }
+
+  late final _rlGetLocationAttribPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Uint32, ffi.Pointer<ffi.Int8>)>>('rlGetLocationAttrib');
+  late final _rlGetLocationAttrib = _rlGetLocationAttribPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Int8>)>();
+
+  void rlSetUniform(
+    int locIndex,
+    ffi.Pointer<ffi.Void> value,
+    int uniformType,
+    int count,
+  ) {
+    return _rlSetUniform(
+      locIndex,
+      value,
+      uniformType,
+      count,
+    );
+  }
+
+  late final _rlSetUniformPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Int32, ffi.Pointer<ffi.Void>, ffi.Int32,
+              ffi.Int32)>>('rlSetUniform');
+  late final _rlSetUniform = _rlSetUniformPtr
+      .asFunction<void Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlSetUniformMatrix(
+    int locIndex,
+    Matrix mat,
+  ) {
+    return _rlSetUniformMatrix(
+      locIndex,
+      mat,
+    );
+  }
+
+  late final _rlSetUniformMatrixPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32, Matrix)>>(
+          'rlSetUniformMatrix');
+  late final _rlSetUniformMatrix =
+      _rlSetUniformMatrixPtr.asFunction<void Function(int, Matrix)>();
+
+  void rlSetUniformSampler(
+    int locIndex,
+    int textureId,
+  ) {
+    return _rlSetUniformSampler(
+      locIndex,
+      textureId,
+    );
+  }
+
+  late final _rlSetUniformSamplerPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32, ffi.Uint32)>>(
+          'rlSetUniformSampler');
+  late final _rlSetUniformSampler =
+      _rlSetUniformSamplerPtr.asFunction<void Function(int, int)>();
+
+  void rlSetShader(
+    int id,
+    ffi.Pointer<ffi.Int32> locs,
+  ) {
+    return _rlSetShader(
+      id,
+      locs,
+    );
+  }
+
+  late final _rlSetShaderPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Uint32, ffi.Pointer<ffi.Int32>)>>('rlSetShader');
+  late final _rlSetShader =
+      _rlSetShaderPtr.asFunction<void Function(int, ffi.Pointer<ffi.Int32>)>();
+
+  /// Compute shader management
+  int rlLoadComputeShaderProgram(
+    int shaderId,
+  ) {
+    return _rlLoadComputeShaderProgram(
+      shaderId,
+    );
+  }
+
+  late final _rlLoadComputeShaderProgramPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function(ffi.Uint32)>>(
+          'rlLoadComputeShaderProgram');
+  late final _rlLoadComputeShaderProgram =
+      _rlLoadComputeShaderProgramPtr.asFunction<int Function(int)>();
+
+  void rlComputeShaderDispatch(
+    int groupX,
+    int groupY,
+    int groupZ,
+  ) {
+    return _rlComputeShaderDispatch(
+      groupX,
+      groupY,
+      groupZ,
+    );
+  }
+
+  late final _rlComputeShaderDispatchPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Uint32, ffi.Uint32, ffi.Uint32)>>('rlComputeShaderDispatch');
+  late final _rlComputeShaderDispatch =
+      _rlComputeShaderDispatchPtr.asFunction<void Function(int, int, int)>();
+
+  /// Shader buffer storage object management (ssbo)
+  int rlLoadShaderBuffer(
+    int size,
+    ffi.Pointer<ffi.Void> data,
+    int usageHint,
+  ) {
+    return _rlLoadShaderBuffer(
+      size,
+      data,
+      usageHint,
+    );
+  }
+
+  late final _rlLoadShaderBufferPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint32 Function(ffi.Uint64, ffi.Pointer<ffi.Void>,
+              ffi.Int32)>>('rlLoadShaderBuffer');
+  late final _rlLoadShaderBuffer = _rlLoadShaderBufferPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Void>, int)>();
+
+  void rlUnloadShaderBuffer(
+    int ssboId,
+  ) {
+    return _rlUnloadShaderBuffer(
+      ssboId,
+    );
+  }
+
+  late final _rlUnloadShaderBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32)>>(
+          'rlUnloadShaderBuffer');
+  late final _rlUnloadShaderBuffer =
+      _rlUnloadShaderBufferPtr.asFunction<void Function(int)>();
+
+  void rlUpdateShaderBufferElements(
+    int id,
+    ffi.Pointer<ffi.Void> data,
+    int dataSize,
+    int offset,
+  ) {
+    return _rlUpdateShaderBufferElements(
+      id,
+      data,
+      dataSize,
+      offset,
+    );
+  }
+
+  late final _rlUpdateShaderBufferElementsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Pointer<ffi.Void>, ffi.Uint64,
+              ffi.Uint64)>>('rlUpdateShaderBufferElements');
+  late final _rlUpdateShaderBufferElements = _rlUpdateShaderBufferElementsPtr
+      .asFunction<void Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+
+  int rlGetShaderBufferSize(
+    int id,
+  ) {
+    return _rlGetShaderBufferSize(
+      id,
+    );
+  }
+
+  late final _rlGetShaderBufferSizePtr =
+      _lookup<ffi.NativeFunction<ffi.Uint64 Function(ffi.Uint32)>>(
+          'rlGetShaderBufferSize');
+  late final _rlGetShaderBufferSize =
+      _rlGetShaderBufferSizePtr.asFunction<int Function(int)>();
+
+  void rlReadShaderBufferElements(
+    int id,
+    ffi.Pointer<ffi.Void> dest,
+    int count,
+    int offset,
+  ) {
+    return _rlReadShaderBufferElements(
+      id,
+      dest,
+      count,
+      offset,
+    );
+  }
+
+  late final _rlReadShaderBufferElementsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Pointer<ffi.Void>, ffi.Uint64,
+              ffi.Uint64)>>('rlReadShaderBufferElements');
+  late final _rlReadShaderBufferElements = _rlReadShaderBufferElementsPtr
+      .asFunction<void Function(int, ffi.Pointer<ffi.Void>, int, int)>();
+
+  void rlBindShaderBuffer(
+    int id,
+    int index,
+  ) {
+    return _rlBindShaderBuffer(
+      id,
+      index,
+    );
+  }
+
+  late final _rlBindShaderBufferPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Uint32, ffi.Uint32)>>(
+          'rlBindShaderBuffer');
+  late final _rlBindShaderBuffer =
+      _rlBindShaderBufferPtr.asFunction<void Function(int, int)>();
+
+  /// Buffer management
+  void rlCopyBuffersElements(
+    int destId,
+    int srcId,
+    int destOffset,
+    int srcOffset,
+    int count,
+  ) {
+    return _rlCopyBuffersElements(
+      destId,
+      srcId,
+      destOffset,
+      srcOffset,
+      count,
+    );
+  }
+
+  late final _rlCopyBuffersElementsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Uint32, ffi.Uint64, ffi.Uint64,
+              ffi.Uint64)>>('rlCopyBuffersElements');
+  late final _rlCopyBuffersElements = _rlCopyBuffersElementsPtr
+      .asFunction<void Function(int, int, int, int, int)>();
+
+  void rlBindImageTexture(
+    int id,
+    int index,
+    int format,
+    int readonly,
+  ) {
+    return _rlBindImageTexture(
+      id,
+      index,
+      format,
+      readonly,
+    );
+  }
+
+  late final _rlBindImageTexturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Uint32, ffi.Uint32, ffi.Uint32,
+              ffi.Int32)>>('rlBindImageTexture');
+  late final _rlBindImageTexture =
+      _rlBindImageTexturePtr.asFunction<void Function(int, int, int, int)>();
+
+  /// Matrix state management
+  Matrix rlGetMatrixModelview() {
+    return _rlGetMatrixModelview();
+  }
+
+  late final _rlGetMatrixModelviewPtr =
+      _lookup<ffi.NativeFunction<Matrix Function()>>('rlGetMatrixModelview');
+  late final _rlGetMatrixModelview =
+      _rlGetMatrixModelviewPtr.asFunction<Matrix Function()>();
+
+  Matrix rlGetMatrixProjection() {
+    return _rlGetMatrixProjection();
+  }
+
+  late final _rlGetMatrixProjectionPtr =
+      _lookup<ffi.NativeFunction<Matrix Function()>>('rlGetMatrixProjection');
+  late final _rlGetMatrixProjection =
+      _rlGetMatrixProjectionPtr.asFunction<Matrix Function()>();
+
+  Matrix rlGetMatrixTransform() {
+    return _rlGetMatrixTransform();
+  }
+
+  late final _rlGetMatrixTransformPtr =
+      _lookup<ffi.NativeFunction<Matrix Function()>>('rlGetMatrixTransform');
+  late final _rlGetMatrixTransform =
+      _rlGetMatrixTransformPtr.asFunction<Matrix Function()>();
+
+  Matrix rlGetMatrixProjectionStereo(
+    int eye,
+  ) {
+    return _rlGetMatrixProjectionStereo(
+      eye,
+    );
+  }
+
+  late final _rlGetMatrixProjectionStereoPtr =
+      _lookup<ffi.NativeFunction<Matrix Function(ffi.Int32)>>(
+          'rlGetMatrixProjectionStereo');
+  late final _rlGetMatrixProjectionStereo =
+      _rlGetMatrixProjectionStereoPtr.asFunction<Matrix Function(int)>();
+
+  Matrix rlGetMatrixViewOffsetStereo(
+    int eye,
+  ) {
+    return _rlGetMatrixViewOffsetStereo(
+      eye,
+    );
+  }
+
+  late final _rlGetMatrixViewOffsetStereoPtr =
+      _lookup<ffi.NativeFunction<Matrix Function(ffi.Int32)>>(
+          'rlGetMatrixViewOffsetStereo');
+  late final _rlGetMatrixViewOffsetStereo =
+      _rlGetMatrixViewOffsetStereoPtr.asFunction<Matrix Function(int)>();
+
+  void rlSetMatrixProjection(
+    Matrix proj,
+  ) {
+    return _rlSetMatrixProjection(
+      proj,
+    );
+  }
+
+  late final _rlSetMatrixProjectionPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Matrix)>>(
+          'rlSetMatrixProjection');
+  late final _rlSetMatrixProjection =
+      _rlSetMatrixProjectionPtr.asFunction<void Function(Matrix)>();
+
+  void rlSetMatrixModelview(
+    Matrix view,
+  ) {
+    return _rlSetMatrixModelview(
+      view,
+    );
+  }
+
+  late final _rlSetMatrixModelviewPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Matrix)>>(
+          'rlSetMatrixModelview');
+  late final _rlSetMatrixModelview =
+      _rlSetMatrixModelviewPtr.asFunction<void Function(Matrix)>();
+
+  void rlSetMatrixProjectionStereo(
+    Matrix right,
+    Matrix left,
+  ) {
+    return _rlSetMatrixProjectionStereo(
+      right,
+      left,
+    );
+  }
+
+  late final _rlSetMatrixProjectionStereoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Matrix, Matrix)>>(
+          'rlSetMatrixProjectionStereo');
+  late final _rlSetMatrixProjectionStereo = _rlSetMatrixProjectionStereoPtr
+      .asFunction<void Function(Matrix, Matrix)>();
+
+  void rlSetMatrixViewOffsetStereo(
+    Matrix right,
+    Matrix left,
+  ) {
+    return _rlSetMatrixViewOffsetStereo(
+      right,
+      left,
+    );
+  }
+
+  late final _rlSetMatrixViewOffsetStereoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(Matrix, Matrix)>>(
+          'rlSetMatrixViewOffsetStereo');
+  late final _rlSetMatrixViewOffsetStereo = _rlSetMatrixViewOffsetStereoPtr
+      .asFunction<void Function(Matrix, Matrix)>();
+
+  /// Quick and dirty cube/quad buffers load->draw->unload
+  void rlLoadDrawCube() {
+    return _rlLoadDrawCube();
+  }
+
+  late final _rlLoadDrawCubePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlLoadDrawCube');
+  late final _rlLoadDrawCube = _rlLoadDrawCubePtr.asFunction<void Function()>();
+
+  void rlLoadDrawQuad() {
+    return _rlLoadDrawQuad();
+  }
+
+  late final _rlLoadDrawQuadPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('rlLoadDrawQuad');
+  late final _rlLoadDrawQuad = _rlLoadDrawQuadPtr.asFunction<void Function()>();
+
+  void _invalid_parameter_noinfo() {
+    return __invalid_parameter_noinfo();
+  }
+
+  late final __invalid_parameter_noinfoPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          '_invalid_parameter_noinfo');
+  late final __invalid_parameter_noinfo =
+      __invalid_parameter_noinfoPtr.asFunction<void Function()>();
+
+  void _invalid_parameter_noinfo_noreturn() {
+    return __invalid_parameter_noinfo_noreturn();
+  }
+
+  late final __invalid_parameter_noinfo_noreturnPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          '_invalid_parameter_noinfo_noreturn');
+  late final __invalid_parameter_noinfo_noreturn =
+      __invalid_parameter_noinfo_noreturnPtr.asFunction<void Function()>();
+
+  void _invoke_watson(
+    ffi.Pointer<wchar_t> _Expression,
+    ffi.Pointer<wchar_t> _FunctionName,
+    ffi.Pointer<wchar_t> _FileName,
+    int _LineNo,
+    int _Reserved,
+  ) {
+    return __invoke_watson(
+      _Expression,
+      _FunctionName,
+      _FileName,
+      _LineNo,
+      _Reserved,
+    );
+  }
+
+  late final __invoke_watsonPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<wchar_t>, ffi.Pointer<wchar_t>,
+              ffi.Pointer<wchar_t>, ffi.Uint32, uintptr_t)>>('_invoke_watson');
+  late final __invoke_watson = __invoke_watsonPtr.asFunction<
+      void Function(ffi.Pointer<wchar_t>, ffi.Pointer<wchar_t>,
+          ffi.Pointer<wchar_t>, int, int)>();
+
+  late final ffi.Pointer<ffi.Double> __HUGE = _lookup<ffi.Double>('_HUGE');
+
+  double get _HUGE => __HUGE.value;
+
+  set _HUGE(double value) => __HUGE.value = value;
+
+  void _fperrraise(
+    int _Except,
+  ) {
+    return __fperrraise(
+      _Except,
+    );
+  }
+
+  late final __fperrraisePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int32)>>('_fperrraise');
+  late final __fperrraise = __fperrraisePtr.asFunction<void Function(int)>();
+
+  int _dclass(
+    double _X,
+  ) {
+    return __dclass(
+      _X,
+    );
+  }
+
+  late final __dclassPtr =
+      _lookup<ffi.NativeFunction<ffi.Int16 Function(ffi.Double)>>('_dclass');
+  late final __dclass = __dclassPtr.asFunction<int Function(double)>();
+
+  int _fdclass(
+    double _X,
+  ) {
+    return __fdclass(
+      _X,
+    );
+  }
+
+  late final __fdclassPtr =
+      _lookup<ffi.NativeFunction<ffi.Int16 Function(ffi.Float)>>('_fdclass');
+  late final __fdclass = __fdclassPtr.asFunction<int Function(double)>();
+
+  int _dsign(
+    double _X,
+  ) {
+    return __dsign(
+      _X,
+    );
+  }
+
+  late final __dsignPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Double)>>('_dsign');
+  late final __dsign = __dsignPtr.asFunction<int Function(double)>();
+
+  int _fdsign(
+    double _X,
+  ) {
+    return __fdsign(
+      _X,
+    );
+  }
+
+  late final __fdsignPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Float)>>('_fdsign');
+  late final __fdsign = __fdsignPtr.asFunction<int Function(double)>();
+
+  int _dpcomp(
+    double _X,
+    double _Y,
+  ) {
+    return __dpcomp(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __dpcompPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Double, ffi.Double)>>(
+          '_dpcomp');
+  late final __dpcomp = __dpcompPtr.asFunction<int Function(double, double)>();
+
+  int _fdpcomp(
+    double _X,
+    double _Y,
+  ) {
+    return __fdpcomp(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __fdpcompPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Float, ffi.Float)>>(
+          '_fdpcomp');
+  late final __fdpcomp =
+      __fdpcompPtr.asFunction<int Function(double, double)>();
+
+  int _dtest(
+    ffi.Pointer<ffi.Double> _Px,
+  ) {
+    return __dtest(
+      _Px,
+    );
+  }
+
+  late final __dtestPtr =
+      _lookup<ffi.NativeFunction<ffi.Int16 Function(ffi.Pointer<ffi.Double>)>>(
+          '_dtest');
+  late final __dtest =
+      __dtestPtr.asFunction<int Function(ffi.Pointer<ffi.Double>)>();
+
+  int _fdtest(
+    ffi.Pointer<ffi.Float> _Px,
+  ) {
+    return __fdtest(
+      _Px,
+    );
+  }
+
+  late final __fdtestPtr =
+      _lookup<ffi.NativeFunction<ffi.Int16 Function(ffi.Pointer<ffi.Float>)>>(
+          '_fdtest');
+  late final __fdtest =
+      __fdtestPtr.asFunction<int Function(ffi.Pointer<ffi.Float>)>();
+
+  int _d_int(
+    ffi.Pointer<ffi.Double> _Px,
+    int _Xexp,
+  ) {
+    return __d_int(
+      _Px,
+      _Xexp,
+    );
+  }
+
+  late final __d_intPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(ffi.Pointer<ffi.Double>, ffi.Int16)>>('_d_int');
+  late final __d_int =
+      __d_intPtr.asFunction<int Function(ffi.Pointer<ffi.Double>, int)>();
+
+  int _fd_int(
+    ffi.Pointer<ffi.Float> _Px,
+    int _Xexp,
+  ) {
+    return __fd_int(
+      _Px,
+      _Xexp,
+    );
+  }
+
+  late final __fd_intPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(ffi.Pointer<ffi.Float>, ffi.Int16)>>('_fd_int');
+  late final __fd_int =
+      __fd_intPtr.asFunction<int Function(ffi.Pointer<ffi.Float>, int)>();
+
+  int _dscale(
+    ffi.Pointer<ffi.Double> _Px,
+    int _Lexp,
+  ) {
+    return __dscale(
+      _Px,
+      _Lexp,
+    );
+  }
+
+  late final __dscalePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(ffi.Pointer<ffi.Double>, ffi.Int64)>>('_dscale');
+  late final __dscale =
+      __dscalePtr.asFunction<int Function(ffi.Pointer<ffi.Double>, int)>();
+
+  int _fdscale(
+    ffi.Pointer<ffi.Float> _Px,
+    int _Lexp,
+  ) {
+    return __fdscale(
+      _Px,
+      _Lexp,
+    );
+  }
+
+  late final __fdscalePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(ffi.Pointer<ffi.Float>, ffi.Int64)>>('_fdscale');
+  late final __fdscale =
+      __fdscalePtr.asFunction<int Function(ffi.Pointer<ffi.Float>, int)>();
+
+  int _dunscale(
+    ffi.Pointer<ffi.Int16> _Pex,
+    ffi.Pointer<ffi.Double> _Px,
+  ) {
+    return __dunscale(
+      _Pex,
+      _Px,
+    );
+  }
+
+  late final __dunscalePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(
+              ffi.Pointer<ffi.Int16>, ffi.Pointer<ffi.Double>)>>('_dunscale');
+  late final __dunscale = __dunscalePtr.asFunction<
+      int Function(ffi.Pointer<ffi.Int16>, ffi.Pointer<ffi.Double>)>();
+
+  int _fdunscale(
+    ffi.Pointer<ffi.Int16> _Pex,
+    ffi.Pointer<ffi.Float> _Px,
+  ) {
+    return __fdunscale(
+      _Pex,
+      _Px,
+    );
+  }
+
+  late final __fdunscalePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(
+              ffi.Pointer<ffi.Int16>, ffi.Pointer<ffi.Float>)>>('_fdunscale');
+  late final __fdunscale = __fdunscalePtr.asFunction<
+      int Function(ffi.Pointer<ffi.Int16>, ffi.Pointer<ffi.Float>)>();
+
+  int _dexp(
+    ffi.Pointer<ffi.Double> _Px,
+    double _Y,
+    int _Eoff,
+  ) {
+    return __dexp(
+      _Px,
+      _Y,
+      _Eoff,
+    );
+  }
+
+  late final __dexpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(
+              ffi.Pointer<ffi.Double>, ffi.Double, ffi.Int64)>>('_dexp');
+  late final __dexp = __dexpPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Double>, double, int)>();
+
+  int _fdexp(
+    ffi.Pointer<ffi.Float> _Px,
+    double _Y,
+    int _Eoff,
+  ) {
+    return __fdexp(
+      _Px,
+      _Y,
+      _Eoff,
+    );
+  }
+
+  late final __fdexpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int16 Function(
+              ffi.Pointer<ffi.Float>, ffi.Float, ffi.Int64)>>('_fdexp');
+  late final __fdexp = __fdexpPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Float>, double, int)>();
+
+  int _dnorm(
+    ffi.Pointer<ffi.Uint16> _Ps,
+  ) {
+    return __dnorm(
+      _Ps,
+    );
+  }
+
+  late final __dnormPtr =
+      _lookup<ffi.NativeFunction<ffi.Int16 Function(ffi.Pointer<ffi.Uint16>)>>(
+          '_dnorm');
+  late final __dnorm =
+      __dnormPtr.asFunction<int Function(ffi.Pointer<ffi.Uint16>)>();
+
+  int _fdnorm(
+    ffi.Pointer<ffi.Uint16> _Ps,
+  ) {
+    return __fdnorm(
+      _Ps,
+    );
+  }
+
+  late final __fdnormPtr =
+      _lookup<ffi.NativeFunction<ffi.Int16 Function(ffi.Pointer<ffi.Uint16>)>>(
+          '_fdnorm');
+  late final __fdnorm =
+      __fdnormPtr.asFunction<int Function(ffi.Pointer<ffi.Uint16>)>();
+
+  double _dpoly(
+    double _X,
+    ffi.Pointer<ffi.Double> _Tab,
+    int _N,
+  ) {
+    return __dpoly(
+      _X,
+      _Tab,
+      _N,
+    );
+  }
+
+  late final __dpolyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Double Function(
+              ffi.Double, ffi.Pointer<ffi.Double>, ffi.Int32)>>('_dpoly');
+  late final __dpoly = __dpolyPtr
+      .asFunction<double Function(double, ffi.Pointer<ffi.Double>, int)>();
+
+  double _fdpoly(
+    double _X,
+    ffi.Pointer<ffi.Float> _Tab,
+    int _N,
+  ) {
+    return __fdpoly(
+      _X,
+      _Tab,
+      _N,
+    );
+  }
+
+  late final __fdpolyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Float Function(
+              ffi.Float, ffi.Pointer<ffi.Float>, ffi.Int32)>>('_fdpoly');
+  late final __fdpoly = __fdpolyPtr
+      .asFunction<double Function(double, ffi.Pointer<ffi.Float>, int)>();
+
+  double _dlog(
+    double _X,
+    int _Baseflag,
+  ) {
+    return __dlog(
+      _X,
+      _Baseflag,
+    );
+  }
+
+  late final __dlogPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Int32)>>(
+          '_dlog');
+  late final __dlog = __dlogPtr.asFunction<double Function(double, int)>();
+
+  double _fdlog(
+    double _X,
+    int _Baseflag,
+  ) {
+    return __fdlog(
+      _X,
+      _Baseflag,
+    );
+  }
+
+  late final __fdlogPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Int32)>>(
+          '_fdlog');
+  late final __fdlog = __fdlogPtr.asFunction<double Function(double, int)>();
+
+  double _dsin(
+    double _X,
+    int _Qoff,
+  ) {
+    return __dsin(
+      _X,
+      _Qoff,
+    );
+  }
+
+  late final __dsinPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Uint32)>>(
+          '_dsin');
+  late final __dsin = __dsinPtr.asFunction<double Function(double, int)>();
+
+  double _fdsin(
+    double _X,
+    int _Qoff,
+  ) {
+    return __fdsin(
+      _X,
+      _Qoff,
+    );
+  }
+
+  late final __fdsinPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Uint32)>>(
+          '_fdsin');
+  late final __fdsin = __fdsinPtr.asFunction<double Function(double, int)>();
+
+  late final ffi.Pointer<_float_const> __Denorm_C =
+      _lookup<_float_const>('_Denorm_C');
+
+  ffi.Pointer<_float_const> get _Denorm_C => __Denorm_C;
+
+  late final ffi.Pointer<_float_const> __Inf_C =
+      _lookup<_float_const>('_Inf_C');
+
+  ffi.Pointer<_float_const> get _Inf_C => __Inf_C;
+
+  late final ffi.Pointer<_float_const> __Nan_C =
+      _lookup<_float_const>('_Nan_C');
+
+  ffi.Pointer<_float_const> get _Nan_C => __Nan_C;
+
+  late final ffi.Pointer<_float_const> __Snan_C =
+      _lookup<_float_const>('_Snan_C');
+
+  ffi.Pointer<_float_const> get _Snan_C => __Snan_C;
+
+  late final ffi.Pointer<_float_const> __Hugeval_C =
+      _lookup<_float_const>('_Hugeval_C');
+
+  ffi.Pointer<_float_const> get _Hugeval_C => __Hugeval_C;
+
+  late final ffi.Pointer<_float_const> __FDenorm_C =
+      _lookup<_float_const>('_FDenorm_C');
+
+  ffi.Pointer<_float_const> get _FDenorm_C => __FDenorm_C;
+
+  late final ffi.Pointer<_float_const> __FInf_C =
+      _lookup<_float_const>('_FInf_C');
+
+  ffi.Pointer<_float_const> get _FInf_C => __FInf_C;
+
+  late final ffi.Pointer<_float_const> __FNan_C =
+      _lookup<_float_const>('_FNan_C');
+
+  ffi.Pointer<_float_const> get _FNan_C => __FNan_C;
+
+  late final ffi.Pointer<_float_const> __FSnan_C =
+      _lookup<_float_const>('_FSnan_C');
+
+  ffi.Pointer<_float_const> get _FSnan_C => __FSnan_C;
+
+  late final ffi.Pointer<_float_const> __LDenorm_C =
+      _lookup<_float_const>('_LDenorm_C');
+
+  ffi.Pointer<_float_const> get _LDenorm_C => __LDenorm_C;
+
+  late final ffi.Pointer<_float_const> __LInf_C =
+      _lookup<_float_const>('_LInf_C');
+
+  ffi.Pointer<_float_const> get _LInf_C => __LInf_C;
+
+  late final ffi.Pointer<_float_const> __LNan_C =
+      _lookup<_float_const>('_LNan_C');
+
+  ffi.Pointer<_float_const> get _LNan_C => __LNan_C;
+
+  late final ffi.Pointer<_float_const> __LSnan_C =
+      _lookup<_float_const>('_LSnan_C');
+
+  ffi.Pointer<_float_const> get _LSnan_C => __LSnan_C;
+
+  late final ffi.Pointer<_float_const> __Eps_C =
+      _lookup<_float_const>('_Eps_C');
+
+  ffi.Pointer<_float_const> get _Eps_C => __Eps_C;
+
+  late final ffi.Pointer<_float_const> __Rteps_C =
+      _lookup<_float_const>('_Rteps_C');
+
+  ffi.Pointer<_float_const> get _Rteps_C => __Rteps_C;
+
+  late final ffi.Pointer<_float_const> __FEps_C =
+      _lookup<_float_const>('_FEps_C');
+
+  ffi.Pointer<_float_const> get _FEps_C => __FEps_C;
+
+  late final ffi.Pointer<_float_const> __FRteps_C =
+      _lookup<_float_const>('_FRteps_C');
+
+  ffi.Pointer<_float_const> get _FRteps_C => __FRteps_C;
+
+  late final ffi.Pointer<_float_const> __LEps_C =
+      _lookup<_float_const>('_LEps_C');
+
+  ffi.Pointer<_float_const> get _LEps_C => __LEps_C;
+
+  late final ffi.Pointer<_float_const> __LRteps_C =
+      _lookup<_float_const>('_LRteps_C');
+
+  ffi.Pointer<_float_const> get _LRteps_C => __LRteps_C;
+
+  late final ffi.Pointer<ffi.Double> __Zero_C = _lookup<ffi.Double>('_Zero_C');
+
+  double get _Zero_C => __Zero_C.value;
+
+  set _Zero_C(double value) => __Zero_C.value = value;
+
+  late final ffi.Pointer<ffi.Double> __Xbig_C = _lookup<ffi.Double>('_Xbig_C');
+
+  double get _Xbig_C => __Xbig_C.value;
+
+  set _Xbig_C(double value) => __Xbig_C.value = value;
+
+  late final ffi.Pointer<ffi.Float> __FZero_C = _lookup<ffi.Float>('_FZero_C');
+
+  double get _FZero_C => __FZero_C.value;
+
+  set _FZero_C(double value) => __FZero_C.value = value;
+
+  late final ffi.Pointer<ffi.Float> __FXbig_C = _lookup<ffi.Float>('_FXbig_C');
+
+  double get _FXbig_C => __FXbig_C.value;
+
+  set _FXbig_C(double value) => __FXbig_C.value = value;
+
+  int abs(
+    int _X,
+  ) {
+    return _abs(
+      _X,
+    );
+  }
+
+  late final _absPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32)>>('abs');
+  late final _abs = _absPtr.asFunction<int Function(int)>();
+
+  int labs(
+    int _X,
+  ) {
+    return _labs(
+      _X,
+    );
+  }
+
+  late final _labsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Int64)>>('labs');
+  late final _labs = _labsPtr.asFunction<int Function(int)>();
+
+  int llabs(
+    int _X,
+  ) {
+    return _llabs(
+      _X,
+    );
+  }
+
+  late final _llabsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Int64)>>('llabs');
+  late final _llabs = _llabsPtr.asFunction<int Function(int)>();
+
+  double acos(
+    double _X,
+  ) {
+    return _acos(
+      _X,
+    );
+  }
+
+  late final _acosPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('acos');
+  late final _acos = _acosPtr.asFunction<double Function(double)>();
+
+  double asin(
+    double _X,
+  ) {
+    return _asin(
+      _X,
+    );
+  }
+
+  late final _asinPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('asin');
+  late final _asin = _asinPtr.asFunction<double Function(double)>();
+
+  double atan(
+    double _X,
+  ) {
+    return _atan(
+      _X,
+    );
+  }
+
+  late final _atanPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('atan');
+  late final _atan = _atanPtr.asFunction<double Function(double)>();
+
+  double atan2(
+    double _Y,
+    double _X,
+  ) {
+    return _atan2(
+      _Y,
+      _X,
+    );
+  }
+
+  late final _atan2Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'atan2');
+  late final _atan2 = _atan2Ptr.asFunction<double Function(double, double)>();
+
+  double cos(
+    double _X,
+  ) {
+    return _cos(
+      _X,
+    );
+  }
+
+  late final _cosPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('cos');
+  late final _cos = _cosPtr.asFunction<double Function(double)>();
+
+  double cosh(
+    double _X,
+  ) {
+    return _cosh(
+      _X,
+    );
+  }
+
+  late final _coshPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('cosh');
+  late final _cosh = _coshPtr.asFunction<double Function(double)>();
+
+  double exp(
+    double _X,
+  ) {
+    return _exp(
+      _X,
+    );
+  }
+
+  late final _expPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('exp');
+  late final _exp = _expPtr.asFunction<double Function(double)>();
+
+  double fabs(
+    double _X,
+  ) {
+    return _fabs(
+      _X,
+    );
+  }
+
+  late final _fabsPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('fabs');
+  late final _fabs = _fabsPtr.asFunction<double Function(double)>();
+
+  double fmod(
+    double _X,
+    double _Y,
+  ) {
+    return _fmod(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fmodPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'fmod');
+  late final _fmod = _fmodPtr.asFunction<double Function(double, double)>();
+
+  double log(
+    double _X,
+  ) {
+    return _log(
+      _X,
+    );
+  }
+
+  late final _logPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('log');
+  late final _log = _logPtr.asFunction<double Function(double)>();
+
+  double log10(
+    double _X,
+  ) {
+    return _log10(
+      _X,
+    );
+  }
+
+  late final _log10Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('log10');
+  late final _log10 = _log10Ptr.asFunction<double Function(double)>();
+
+  double pow(
+    double _X,
+    double _Y,
+  ) {
+    return _pow(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _powPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'pow');
+  late final _pow = _powPtr.asFunction<double Function(double, double)>();
+
+  double sin(
+    double _X,
+  ) {
+    return _sin(
+      _X,
+    );
+  }
+
+  late final _sinPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('sin');
+  late final _sin = _sinPtr.asFunction<double Function(double)>();
+
+  double sinh(
+    double _X,
+  ) {
+    return _sinh(
+      _X,
+    );
+  }
+
+  late final _sinhPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('sinh');
+  late final _sinh = _sinhPtr.asFunction<double Function(double)>();
+
+  double sqrt(
+    double _X,
+  ) {
+    return _sqrt(
+      _X,
+    );
+  }
+
+  late final _sqrtPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('sqrt');
+  late final _sqrt = _sqrtPtr.asFunction<double Function(double)>();
+
+  double tan(
+    double _X,
+  ) {
+    return _tan(
+      _X,
+    );
+  }
+
+  late final _tanPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('tan');
+  late final _tan = _tanPtr.asFunction<double Function(double)>();
+
+  double tanh(
+    double _X,
+  ) {
+    return _tanh(
+      _X,
+    );
+  }
+
+  late final _tanhPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('tanh');
+  late final _tanh = _tanhPtr.asFunction<double Function(double)>();
+
+  double acosh(
+    double _X,
+  ) {
+    return _acosh(
+      _X,
+    );
+  }
+
+  late final _acoshPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('acosh');
+  late final _acosh = _acoshPtr.asFunction<double Function(double)>();
+
+  double asinh(
+    double _X,
+  ) {
+    return _asinh(
+      _X,
+    );
+  }
+
+  late final _asinhPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('asinh');
+  late final _asinh = _asinhPtr.asFunction<double Function(double)>();
+
+  double atanh(
+    double _X,
+  ) {
+    return _atanh(
+      _X,
+    );
+  }
+
+  late final _atanhPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('atanh');
+  late final _atanh = _atanhPtr.asFunction<double Function(double)>();
+
+  double atof(
+    ffi.Pointer<ffi.Int8> _String,
+  ) {
+    return _atof(
+      _String,
+    );
+  }
+
+  late final _atofPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<ffi.Int8>)>>(
+          'atof');
+  late final _atof =
+      _atofPtr.asFunction<double Function(ffi.Pointer<ffi.Int8>)>();
+
+  double _atof_l(
+    ffi.Pointer<ffi.Int8> _String,
+    _locale_t _Locale,
+  ) {
+    return __atof_l(
+      _String,
+      _Locale,
+    );
+  }
+
+  late final __atof_lPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Double Function(ffi.Pointer<ffi.Int8>, _locale_t)>>('_atof_l');
+  late final __atof_l = __atof_lPtr
+      .asFunction<double Function(ffi.Pointer<ffi.Int8>, _locale_t)>();
+
+  double _cabs(
+    _complex _Complex_value,
+  ) {
+    return __cabs(
+      _Complex_value,
+    );
+  }
+
+  late final __cabsPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(_complex)>>('_cabs');
+  late final __cabs = __cabsPtr.asFunction<double Function(_complex)>();
+
+  double cbrt(
+    double _X,
+  ) {
+    return _cbrt(
+      _X,
+    );
+  }
+
+  late final _cbrtPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('cbrt');
+  late final _cbrt = _cbrtPtr.asFunction<double Function(double)>();
+
+  double ceil(
+    double _X,
+  ) {
+    return _ceil(
+      _X,
+    );
+  }
+
+  late final _ceilPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('ceil');
+  late final _ceil = _ceilPtr.asFunction<double Function(double)>();
+
+  double _chgsign(
+    double _X,
+  ) {
+    return __chgsign(
+      _X,
+    );
+  }
+
+  late final __chgsignPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('_chgsign');
+  late final __chgsign = __chgsignPtr.asFunction<double Function(double)>();
+
+  double copysign(
+    double _Number,
+    double _Sign,
+  ) {
+    return _copysign1(
+      _Number,
+      _Sign,
+    );
+  }
+
+  late final _copysignPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'copysign');
+  late final _copysign1 =
+      _copysignPtr.asFunction<double Function(double, double)>();
+
+  double _copysign(
+    double _Number,
+    double _Sign,
+  ) {
+    return __copysign(
+      _Number,
+      _Sign,
+    );
+  }
+
+  late final __copysignPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          '_copysign');
+  late final __copysign =
+      __copysignPtr.asFunction<double Function(double, double)>();
+
+  double erf(
+    double _X,
+  ) {
+    return _erf(
+      _X,
+    );
+  }
+
+  late final _erfPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('erf');
+  late final _erf = _erfPtr.asFunction<double Function(double)>();
+
+  double erfc(
+    double _X,
+  ) {
+    return _erfc(
+      _X,
+    );
+  }
+
+  late final _erfcPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('erfc');
+  late final _erfc = _erfcPtr.asFunction<double Function(double)>();
+
+  double exp2(
+    double _X,
+  ) {
+    return _exp2(
+      _X,
+    );
+  }
+
+  late final _exp2Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('exp2');
+  late final _exp2 = _exp2Ptr.asFunction<double Function(double)>();
+
+  double expm1(
+    double _X,
+  ) {
+    return _expm1(
+      _X,
+    );
+  }
+
+  late final _expm1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('expm1');
+  late final _expm1 = _expm1Ptr.asFunction<double Function(double)>();
+
+  double fdim(
+    double _X,
+    double _Y,
+  ) {
+    return _fdim(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fdimPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'fdim');
+  late final _fdim = _fdimPtr.asFunction<double Function(double, double)>();
+
+  double floor(
+    double _X,
+  ) {
+    return _floor(
+      _X,
+    );
+  }
+
+  late final _floorPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('floor');
+  late final _floor = _floorPtr.asFunction<double Function(double)>();
+
+  double fma(
+    double _X,
+    double _Y,
+    double _Z,
+  ) {
+    return _fma(
+      _X,
+      _Y,
+      _Z,
+    );
+  }
+
+  late final _fmaPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Double Function(ffi.Double, ffi.Double, ffi.Double)>>('fma');
+  late final _fma =
+      _fmaPtr.asFunction<double Function(double, double, double)>();
+
+  double fmax(
+    double _X,
+    double _Y,
+  ) {
+    return _fmax(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fmaxPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'fmax');
+  late final _fmax = _fmaxPtr.asFunction<double Function(double, double)>();
+
+  double fmin(
+    double _X,
+    double _Y,
+  ) {
+    return _fmin(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fminPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'fmin');
+  late final _fmin = _fminPtr.asFunction<double Function(double, double)>();
+
+  double frexp(
+    double _X,
+    ffi.Pointer<ffi.Int32> _Y,
+  ) {
+    return _frexp(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _frexpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Double Function(ffi.Double, ffi.Pointer<ffi.Int32>)>>('frexp');
+  late final _frexp =
+      _frexpPtr.asFunction<double Function(double, ffi.Pointer<ffi.Int32>)>();
+
+  double hypot(
+    double _X,
+    double _Y,
+  ) {
+    return _hypot1(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _hypotPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'hypot');
+  late final _hypot1 = _hypotPtr.asFunction<double Function(double, double)>();
+
+  double _hypot(
+    double _X,
+    double _Y,
+  ) {
+    return __hypot(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __hypotPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          '_hypot');
+  late final __hypot = __hypotPtr.asFunction<double Function(double, double)>();
+
+  int ilogb(
+    double _X,
+  ) {
+    return _ilogb(
+      _X,
+    );
+  }
+
+  late final _ilogbPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Double)>>('ilogb');
+  late final _ilogb = _ilogbPtr.asFunction<int Function(double)>();
+
+  double ldexp(
+    double _X,
+    int _Y,
+  ) {
+    return _ldexp(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _ldexpPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Int32)>>(
+          'ldexp');
+  late final _ldexp = _ldexpPtr.asFunction<double Function(double, int)>();
+
+  double lgamma(
+    double _X,
+  ) {
+    return _lgamma(
+      _X,
+    );
+  }
+
+  late final _lgammaPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('lgamma');
+  late final _lgamma = _lgammaPtr.asFunction<double Function(double)>();
+
+  int llrint(
+    double _X,
+  ) {
+    return _llrint(
+      _X,
+    );
+  }
+
+  late final _llrintPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Double)>>('llrint');
+  late final _llrint = _llrintPtr.asFunction<int Function(double)>();
+
+  int llround(
+    double _X,
+  ) {
+    return _llround(
+      _X,
+    );
+  }
+
+  late final _llroundPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Double)>>('llround');
+  late final _llround = _llroundPtr.asFunction<int Function(double)>();
+
+  double log1p(
+    double _X,
+  ) {
+    return _log1p(
+      _X,
+    );
+  }
+
+  late final _log1pPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('log1p');
+  late final _log1p = _log1pPtr.asFunction<double Function(double)>();
+
+  double log2(
+    double _X,
+  ) {
+    return _log2(
+      _X,
+    );
+  }
+
+  late final _log2Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('log2');
+  late final _log2 = _log2Ptr.asFunction<double Function(double)>();
+
+  double logb(
+    double _X,
+  ) {
+    return _logb(
+      _X,
+    );
+  }
+
+  late final _logbPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('logb');
+  late final _logb = _logbPtr.asFunction<double Function(double)>();
+
+  int lrint(
+    double _X,
+  ) {
+    return _lrint(
+      _X,
+    );
+  }
+
+  late final _lrintPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Double)>>('lrint');
+  late final _lrint = _lrintPtr.asFunction<int Function(double)>();
+
+  int lround(
+    double _X,
+  ) {
+    return _lround(
+      _X,
+    );
+  }
+
+  late final _lroundPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Double)>>('lround');
+  late final _lround = _lroundPtr.asFunction<int Function(double)>();
+
+  int _matherr(
+    ffi.Pointer<_exception> _Except,
+  ) {
+    return __matherr(
+      _Except,
+    );
+  }
+
+  late final __matherrPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<_exception>)>>(
+          '_matherr');
+  late final __matherr =
+      __matherrPtr.asFunction<int Function(ffi.Pointer<_exception>)>();
+
+  double modf(
+    double _X,
+    ffi.Pointer<ffi.Double> _Y,
+  ) {
+    return _modf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _modfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Double Function(ffi.Double, ffi.Pointer<ffi.Double>)>>('modf');
+  late final _modf =
+      _modfPtr.asFunction<double Function(double, ffi.Pointer<ffi.Double>)>();
+
+  double nan(
+    ffi.Pointer<ffi.Int8> _X,
+  ) {
+    return _nan(
+      _X,
+    );
+  }
+
+  late final _nanPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Pointer<ffi.Int8>)>>(
+          'nan');
+  late final _nan =
+      _nanPtr.asFunction<double Function(ffi.Pointer<ffi.Int8>)>();
+
+  double nearbyint(
+    double _X,
+  ) {
+    return _nearbyint(
+      _X,
+    );
+  }
+
+  late final _nearbyintPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('nearbyint');
+  late final _nearbyint = _nearbyintPtr.asFunction<double Function(double)>();
+
+  double nextafter(
+    double _X,
+    double _Y,
+  ) {
+    return _nextafter(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _nextafterPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'nextafter');
+  late final _nextafter =
+      _nextafterPtr.asFunction<double Function(double, double)>();
+
+  double remainder(
+    double _X,
+    double _Y,
+  ) {
+    return _remainder(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _remainderPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Double)>>(
+          'remainder');
+  late final _remainder =
+      _remainderPtr.asFunction<double Function(double, double)>();
+
+  double remquo(
+    double _X,
+    double _Y,
+    ffi.Pointer<ffi.Int32> _Z,
+  ) {
+    return _remquo(
+      _X,
+      _Y,
+      _Z,
+    );
+  }
+
+  late final _remquoPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Double Function(
+              ffi.Double, ffi.Double, ffi.Pointer<ffi.Int32>)>>('remquo');
+  late final _remquo = _remquoPtr
+      .asFunction<double Function(double, double, ffi.Pointer<ffi.Int32>)>();
+
+  double rint(
+    double _X,
+  ) {
+    return _rint(
+      _X,
+    );
+  }
+
+  late final _rintPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('rint');
+  late final _rint = _rintPtr.asFunction<double Function(double)>();
+
+  double round(
+    double _X,
+  ) {
+    return _round(
+      _X,
+    );
+  }
+
+  late final _roundPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('round');
+  late final _round = _roundPtr.asFunction<double Function(double)>();
+
+  double scalbln(
+    double _X,
+    int _Y,
+  ) {
+    return _scalbln(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _scalblnPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Int64)>>(
+          'scalbln');
+  late final _scalbln = _scalblnPtr.asFunction<double Function(double, int)>();
+
+  double scalbn(
+    double _X,
+    int _Y,
+  ) {
+    return _scalbn(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _scalbnPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double, ffi.Int32)>>(
+          'scalbn');
+  late final _scalbn = _scalbnPtr.asFunction<double Function(double, int)>();
+
+  double tgamma(
+    double _X,
+  ) {
+    return _tgamma(
+      _X,
+    );
+  }
+
+  late final _tgammaPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('tgamma');
+  late final _tgamma = _tgammaPtr.asFunction<double Function(double)>();
+
+  double trunc(
+    double _X,
+  ) {
+    return _trunc(
+      _X,
+    );
+  }
+
+  late final _truncPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('trunc');
+  late final _trunc = _truncPtr.asFunction<double Function(double)>();
+
+  double _j0(
+    double _X,
+  ) {
+    return __j0(
+      _X,
+    );
+  }
+
+  late final __j0Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('_j0');
+  late final __j0 = __j0Ptr.asFunction<double Function(double)>();
+
+  double _j1(
+    double _X,
+  ) {
+    return __j1(
+      _X,
+    );
+  }
+
+  late final __j1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('_j1');
+  late final __j1 = __j1Ptr.asFunction<double Function(double)>();
+
+  double _jn(
+    int _X,
+    double _Y,
+  ) {
+    return __jn(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __jnPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Int32, ffi.Double)>>(
+          '_jn');
+  late final __jn = __jnPtr.asFunction<double Function(int, double)>();
+
+  double _y0(
+    double _X,
+  ) {
+    return __y0(
+      _X,
+    );
+  }
+
+  late final __y0Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('_y0');
+  late final __y0 = __y0Ptr.asFunction<double Function(double)>();
+
+  double _y1(
+    double _X,
+  ) {
+    return __y1(
+      _X,
+    );
+  }
+
+  late final __y1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('_y1');
+  late final __y1 = __y1Ptr.asFunction<double Function(double)>();
+
+  double _yn(
+    int _X,
+    double _Y,
+  ) {
+    return __yn(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __ynPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Int32, ffi.Double)>>(
+          '_yn');
+  late final __yn = __ynPtr.asFunction<double Function(int, double)>();
+
+  double acoshf(
+    double _X,
+  ) {
+    return _acoshf(
+      _X,
+    );
+  }
+
+  late final _acoshfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('acoshf');
+  late final _acoshf = _acoshfPtr.asFunction<double Function(double)>();
+
+  double asinhf(
+    double _X,
+  ) {
+    return _asinhf(
+      _X,
+    );
+  }
+
+  late final _asinhfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('asinhf');
+  late final _asinhf = _asinhfPtr.asFunction<double Function(double)>();
+
+  double atanhf(
+    double _X,
+  ) {
+    return _atanhf(
+      _X,
+    );
+  }
+
+  late final _atanhfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('atanhf');
+  late final _atanhf = _atanhfPtr.asFunction<double Function(double)>();
+
+  double cbrtf(
+    double _X,
+  ) {
+    return _cbrtf(
+      _X,
+    );
+  }
+
+  late final _cbrtfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('cbrtf');
+  late final _cbrtf = _cbrtfPtr.asFunction<double Function(double)>();
+
+  double _chgsignf(
+    double _X,
+  ) {
+    return __chgsignf(
+      _X,
+    );
+  }
+
+  late final __chgsignfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('_chgsignf');
+  late final __chgsignf = __chgsignfPtr.asFunction<double Function(double)>();
+
+  double copysignf(
+    double _Number,
+    double _Sign,
+  ) {
+    return _copysignf1(
+      _Number,
+      _Sign,
+    );
+  }
+
+  late final _copysignfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'copysignf');
+  late final _copysignf1 =
+      _copysignfPtr.asFunction<double Function(double, double)>();
+
+  double _copysignf(
+    double _Number,
+    double _Sign,
+  ) {
+    return __copysignf(
+      _Number,
+      _Sign,
+    );
+  }
+
+  late final __copysignfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          '_copysignf');
+  late final __copysignf =
+      __copysignfPtr.asFunction<double Function(double, double)>();
+
+  double erff(
+    double _X,
+  ) {
+    return _erff(
+      _X,
+    );
+  }
+
+  late final _erffPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('erff');
+  late final _erff = _erffPtr.asFunction<double Function(double)>();
+
+  double erfcf(
+    double _X,
+  ) {
+    return _erfcf(
+      _X,
+    );
+  }
+
+  late final _erfcfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('erfcf');
+  late final _erfcf = _erfcfPtr.asFunction<double Function(double)>();
+
+  double expm1f(
+    double _X,
+  ) {
+    return _expm1f(
+      _X,
+    );
+  }
+
+  late final _expm1fPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('expm1f');
+  late final _expm1f = _expm1fPtr.asFunction<double Function(double)>();
+
+  double exp2f(
+    double _X,
+  ) {
+    return _exp2f(
+      _X,
+    );
+  }
+
+  late final _exp2fPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('exp2f');
+  late final _exp2f = _exp2fPtr.asFunction<double Function(double)>();
+
+  double fdimf(
+    double _X,
+    double _Y,
+  ) {
+    return _fdimf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fdimfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'fdimf');
+  late final _fdimf = _fdimfPtr.asFunction<double Function(double, double)>();
+
+  double fmaf(
+    double _X,
+    double _Y,
+    double _Z,
+  ) {
+    return _fmaf(
+      _X,
+      _Y,
+      _Z,
+    );
+  }
+
+  late final _fmafPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Float Function(ffi.Float, ffi.Float, ffi.Float)>>('fmaf');
+  late final _fmaf =
+      _fmafPtr.asFunction<double Function(double, double, double)>();
+
+  double fmaxf(
+    double _X,
+    double _Y,
+  ) {
+    return _fmaxf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fmaxfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'fmaxf');
+  late final _fmaxf = _fmaxfPtr.asFunction<double Function(double, double)>();
+
+  double fminf(
+    double _X,
+    double _Y,
+  ) {
+    return _fminf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fminfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'fminf');
+  late final _fminf = _fminfPtr.asFunction<double Function(double, double)>();
+
+  double _hypotf(
+    double _X,
+    double _Y,
+  ) {
+    return __hypotf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __hypotfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          '_hypotf');
+  late final __hypotf =
+      __hypotfPtr.asFunction<double Function(double, double)>();
+
+  int ilogbf(
+    double _X,
+  ) {
+    return _ilogbf(
+      _X,
+    );
+  }
+
+  late final _ilogbfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Float)>>('ilogbf');
+  late final _ilogbf = _ilogbfPtr.asFunction<int Function(double)>();
+
+  double lgammaf(
+    double _X,
+  ) {
+    return _lgammaf(
+      _X,
+    );
+  }
+
+  late final _lgammafPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('lgammaf');
+  late final _lgammaf = _lgammafPtr.asFunction<double Function(double)>();
+
+  int llrintf(
+    double _X,
+  ) {
+    return _llrintf(
+      _X,
+    );
+  }
+
+  late final _llrintfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Float)>>('llrintf');
+  late final _llrintf = _llrintfPtr.asFunction<int Function(double)>();
+
+  int llroundf(
+    double _X,
+  ) {
+    return _llroundf(
+      _X,
+    );
+  }
+
+  late final _llroundfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Float)>>('llroundf');
+  late final _llroundf = _llroundfPtr.asFunction<int Function(double)>();
+
+  double log1pf(
+    double _X,
+  ) {
+    return _log1pf(
+      _X,
+    );
+  }
+
+  late final _log1pfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('log1pf');
+  late final _log1pf = _log1pfPtr.asFunction<double Function(double)>();
+
+  double log2f(
+    double _X,
+  ) {
+    return _log2f(
+      _X,
+    );
+  }
+
+  late final _log2fPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('log2f');
+  late final _log2f = _log2fPtr.asFunction<double Function(double)>();
+
+  double logbf(
+    double _X,
+  ) {
+    return _logbf1(
+      _X,
+    );
+  }
+
+  late final _logbfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('logbf');
+  late final _logbf1 = _logbfPtr.asFunction<double Function(double)>();
+
+  int lrintf(
+    double _X,
+  ) {
+    return _lrintf(
+      _X,
+    );
+  }
+
+  late final _lrintfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Float)>>('lrintf');
+  late final _lrintf = _lrintfPtr.asFunction<int Function(double)>();
+
+  int lroundf(
+    double _X,
+  ) {
+    return _lroundf(
+      _X,
+    );
+  }
+
+  late final _lroundfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Float)>>('lroundf');
+  late final _lroundf = _lroundfPtr.asFunction<int Function(double)>();
+
+  double nanf(
+    ffi.Pointer<ffi.Int8> _X,
+  ) {
+    return _nanf(
+      _X,
+    );
+  }
+
+  late final _nanfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Pointer<ffi.Int8>)>>(
+          'nanf');
+  late final _nanf =
+      _nanfPtr.asFunction<double Function(ffi.Pointer<ffi.Int8>)>();
+
+  double nearbyintf(
+    double _X,
+  ) {
+    return _nearbyintf(
+      _X,
+    );
+  }
+
+  late final _nearbyintfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('nearbyintf');
+  late final _nearbyintf = _nearbyintfPtr.asFunction<double Function(double)>();
+
+  double nextafterf(
+    double _X,
+    double _Y,
+  ) {
+    return _nextafterf1(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _nextafterfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'nextafterf');
+  late final _nextafterf1 =
+      _nextafterfPtr.asFunction<double Function(double, double)>();
+
+  double remainderf(
+    double _X,
+    double _Y,
+  ) {
+    return _remainderf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _remainderfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'remainderf');
+  late final _remainderf =
+      _remainderfPtr.asFunction<double Function(double, double)>();
+
+  double remquof(
+    double _X,
+    double _Y,
+    ffi.Pointer<ffi.Int32> _Z,
+  ) {
+    return _remquof(
+      _X,
+      _Y,
+      _Z,
+    );
+  }
+
+  late final _remquofPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Float Function(
+              ffi.Float, ffi.Float, ffi.Pointer<ffi.Int32>)>>('remquof');
+  late final _remquof = _remquofPtr
+      .asFunction<double Function(double, double, ffi.Pointer<ffi.Int32>)>();
+
+  double rintf(
+    double _X,
+  ) {
+    return _rintf(
+      _X,
+    );
+  }
+
+  late final _rintfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('rintf');
+  late final _rintf = _rintfPtr.asFunction<double Function(double)>();
+
+  double roundf(
+    double _X,
+  ) {
+    return _roundf(
+      _X,
+    );
+  }
+
+  late final _roundfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('roundf');
+  late final _roundf = _roundfPtr.asFunction<double Function(double)>();
+
+  double scalblnf(
+    double _X,
+    int _Y,
+  ) {
+    return _scalblnf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _scalblnfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Int64)>>(
+          'scalblnf');
+  late final _scalblnf =
+      _scalblnfPtr.asFunction<double Function(double, int)>();
+
+  double scalbnf(
+    double _X,
+    int _Y,
+  ) {
+    return _scalbnf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _scalbnfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Int32)>>(
+          'scalbnf');
+  late final _scalbnf = _scalbnfPtr.asFunction<double Function(double, int)>();
+
+  double tgammaf(
+    double _X,
+  ) {
+    return _tgammaf(
+      _X,
+    );
+  }
+
+  late final _tgammafPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('tgammaf');
+  late final _tgammaf = _tgammafPtr.asFunction<double Function(double)>();
+
+  double truncf(
+    double _X,
+  ) {
+    return _truncf(
+      _X,
+    );
+  }
+
+  late final _truncfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('truncf');
+  late final _truncf = _truncfPtr.asFunction<double Function(double)>();
+
+  double _logbf(
+    double _X,
+  ) {
+    return __logbf(
+      _X,
+    );
+  }
+
+  late final __logbfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('_logbf');
+  late final __logbf = __logbfPtr.asFunction<double Function(double)>();
+
+  double _nextafterf(
+    double _X,
+    double _Y,
+  ) {
+    return __nextafterf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final __nextafterfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          '_nextafterf');
+  late final __nextafterf =
+      __nextafterfPtr.asFunction<double Function(double, double)>();
+
+  int _finitef(
+    double _X,
+  ) {
+    return __finitef(
+      _X,
+    );
+  }
+
+  late final __finitefPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Float)>>('_finitef');
+  late final __finitef = __finitefPtr.asFunction<int Function(double)>();
+
+  int _isnanf(
+    double _X,
+  ) {
+    return __isnanf(
+      _X,
+    );
+  }
+
+  late final __isnanfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Float)>>('_isnanf');
+  late final __isnanf = __isnanfPtr.asFunction<int Function(double)>();
+
+  int _fpclassf(
+    double _X,
+  ) {
+    return __fpclassf(
+      _X,
+    );
+  }
+
+  late final __fpclassfPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Float)>>('_fpclassf');
+  late final __fpclassf = __fpclassfPtr.asFunction<int Function(double)>();
+
+  int _set_FMA3_enable(
+    int _Flag,
+  ) {
+    return __set_FMA3_enable(
+      _Flag,
+    );
+  }
+
+  late final __set_FMA3_enablePtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32)>>(
+          '_set_FMA3_enable');
+  late final __set_FMA3_enable =
+      __set_FMA3_enablePtr.asFunction<int Function(int)>();
+
+  int _get_FMA3_enable() {
+    return __get_FMA3_enable();
+  }
+
+  late final __get_FMA3_enablePtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function()>>('_get_FMA3_enable');
+  late final __get_FMA3_enable =
+      __get_FMA3_enablePtr.asFunction<int Function()>();
+
+  double acosf(
+    double _X,
+  ) {
+    return _acosf(
+      _X,
+    );
+  }
+
+  late final _acosfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('acosf');
+  late final _acosf = _acosfPtr.asFunction<double Function(double)>();
+
+  double asinf(
+    double _X,
+  ) {
+    return _asinf(
+      _X,
+    );
+  }
+
+  late final _asinfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('asinf');
+  late final _asinf = _asinfPtr.asFunction<double Function(double)>();
+
+  double atan2f(
+    double _Y,
+    double _X,
+  ) {
+    return _atan2f(
+      _Y,
+      _X,
+    );
+  }
+
+  late final _atan2fPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'atan2f');
+  late final _atan2f = _atan2fPtr.asFunction<double Function(double, double)>();
+
+  double atanf(
+    double _X,
+  ) {
+    return _atanf(
+      _X,
+    );
+  }
+
+  late final _atanfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('atanf');
+  late final _atanf = _atanfPtr.asFunction<double Function(double)>();
+
+  double ceilf(
+    double _X,
+  ) {
+    return _ceilf(
+      _X,
+    );
+  }
+
+  late final _ceilfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('ceilf');
+  late final _ceilf = _ceilfPtr.asFunction<double Function(double)>();
+
+  double cosf(
+    double _X,
+  ) {
+    return _cosf(
+      _X,
+    );
+  }
+
+  late final _cosfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('cosf');
+  late final _cosf = _cosfPtr.asFunction<double Function(double)>();
+
+  double coshf(
+    double _X,
+  ) {
+    return _coshf(
+      _X,
+    );
+  }
+
+  late final _coshfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('coshf');
+  late final _coshf = _coshfPtr.asFunction<double Function(double)>();
+
+  double expf(
+    double _X,
+  ) {
+    return _expf(
+      _X,
+    );
+  }
+
+  late final _expfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('expf');
+  late final _expf = _expfPtr.asFunction<double Function(double)>();
+
+  double floorf(
+    double _X,
+  ) {
+    return _floorf(
+      _X,
+    );
+  }
+
+  late final _floorfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('floorf');
+  late final _floorf = _floorfPtr.asFunction<double Function(double)>();
+
+  double fmodf(
+    double _X,
+    double _Y,
+  ) {
+    return _fmodf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _fmodfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'fmodf');
+  late final _fmodf = _fmodfPtr.asFunction<double Function(double, double)>();
+
+  double log10f(
+    double _X,
+  ) {
+    return _log10f(
+      _X,
+    );
+  }
+
+  late final _log10fPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('log10f');
+  late final _log10f = _log10fPtr.asFunction<double Function(double)>();
+
+  double logf(
+    double _X,
+  ) {
+    return _logf(
+      _X,
+    );
+  }
+
+  late final _logfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('logf');
+  late final _logf = _logfPtr.asFunction<double Function(double)>();
+
+  double modff(
+    double _X,
+    ffi.Pointer<ffi.Float> _Y,
+  ) {
+    return _modff(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _modffPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Float Function(ffi.Float, ffi.Pointer<ffi.Float>)>>('modff');
+  late final _modff =
+      _modffPtr.asFunction<double Function(double, ffi.Pointer<ffi.Float>)>();
+
+  double powf(
+    double _X,
+    double _Y,
+  ) {
+    return _powf(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _powfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float, ffi.Float)>>(
+          'powf');
+  late final _powf = _powfPtr.asFunction<double Function(double, double)>();
+
+  double sinf(
+    double _X,
+  ) {
+    return _sinf(
+      _X,
+    );
+  }
+
+  late final _sinfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('sinf');
+  late final _sinf = _sinfPtr.asFunction<double Function(double)>();
+
+  double sinhf(
+    double _X,
+  ) {
+    return _sinhf(
+      _X,
+    );
+  }
+
+  late final _sinhfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('sinhf');
+  late final _sinhf = _sinhfPtr.asFunction<double Function(double)>();
+
+  double sqrtf(
+    double _X,
+  ) {
+    return _sqrtf(
+      _X,
+    );
+  }
+
+  late final _sqrtfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('sqrtf');
+  late final _sqrtf = _sqrtfPtr.asFunction<double Function(double)>();
+
+  double tanf(
+    double _X,
+  ) {
+    return _tanf(
+      _X,
+    );
+  }
+
+  late final _tanfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('tanf');
+  late final _tanf = _tanfPtr.asFunction<double Function(double)>();
+
+  double tanhf(
+    double _X,
+  ) {
+    return _tanhf(
+      _X,
+    );
+  }
+
+  late final _tanhfPtr =
+      _lookup<ffi.NativeFunction<ffi.Float Function(ffi.Float)>>('tanhf');
+  late final _tanhf = _tanhfPtr.asFunction<double Function(double)>();
+
+  late final ffi.Pointer<ffi.Double> _HUGE1 = _lookup<ffi.Double>('HUGE');
+
+  double get HUGE => _HUGE1.value;
+
+  set HUGE(double value) => _HUGE1.value = value;
+
+  double j0(
+    double _X,
+  ) {
+    return _j01(
+      _X,
+    );
+  }
+
+  late final _j0Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('j0');
+  late final _j01 = _j0Ptr.asFunction<double Function(double)>();
+
+  double j1(
+    double _X,
+  ) {
+    return _j11(
+      _X,
+    );
+  }
+
+  late final _j1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('j1');
+  late final _j11 = _j1Ptr.asFunction<double Function(double)>();
+
+  double jn(
+    int _X,
+    double _Y,
+  ) {
+    return _jn1(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _jnPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Int32, ffi.Double)>>(
+          'jn');
+  late final _jn1 = _jnPtr.asFunction<double Function(int, double)>();
+
+  double y0(
+    double _X,
+  ) {
+    return _y01(
+      _X,
+    );
+  }
+
+  late final _y0Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('y0');
+  late final _y01 = _y0Ptr.asFunction<double Function(double)>();
+
+  double y1(
+    double _X,
+  ) {
+    return _y11(
+      _X,
+    );
+  }
+
+  late final _y1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Double)>>('y1');
+  late final _y11 = _y1Ptr.asFunction<double Function(double)>();
+
+  double yn(
+    int _X,
+    double _Y,
+  ) {
+    return _yn1(
+      _X,
+      _Y,
+    );
+  }
+
+  late final _ynPtr =
+      _lookup<ffi.NativeFunction<ffi.Double Function(ffi.Int32, ffi.Double)>>(
+          'yn');
+  late final _yn1 = _ynPtr.asFunction<double Function(int, double)>();
 }
+
+typedef va_list = ffi.Pointer<ffi.Int8>;
+typedef uintptr_t = ffi.Uint64;
 
 /// Vector2, 2 components
 class Vector2 extends ffi.Struct {
@@ -8315,7 +13088,7 @@ class Mesh extends ffi.Struct {
   /// Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
   external ffi.Pointer<ffi.Float> texcoords;
 
-  /// Vertex second texture coordinates (useful for lightmaps) (shader-location = 5)
+  /// Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5)
   external ffi.Pointer<ffi.Float> texcoords2;
 
   /// Vertex normals (XYZ - 3 components per vertex) (shader-location = 2)
@@ -8519,10 +13292,15 @@ class Wave extends ffi.Struct {
 
 class rAudioBuffer extends ffi.Opaque {}
 
+class rAudioProcessor extends ffi.Opaque {}
+
 /// AudioStream, custom audio stream
 class AudioStream extends ffi.Struct {
   /// Pointer to internal data used by the audio system
   external ffi.Pointer<rAudioBuffer> buffer;
+
+  /// Pointer to internal data processor, useful for audio effects
+  external ffi.Pointer<rAudioProcessor> processor;
 
   /// Frequency (samples per second)
   @ffi.Uint32()
@@ -8636,6 +13414,20 @@ class VrStereoConfig extends ffi.Struct {
   external ffi.Array<ffi.Float> scaleIn;
 }
 
+/// File path list
+class FilePathList extends ffi.Struct {
+  /// Filepaths max entries
+  @ffi.Uint32()
+  external int capacity;
+
+  /// Filepaths entries count
+  @ffi.Uint32()
+  external int count;
+
+  /// Filepaths entries
+  external ffi.Pointer<ffi.Pointer<ffi.Int8>> paths;
+}
+
 /// ----------------------------------------------------------------------------------
 /// Enumerators Definition
 /// ----------------------------------------------------------------------------------
@@ -8679,6 +13471,9 @@ abstract class ConfigFlags {
   /// Set to support HighDPI
   static const int WINDOW_HIGHDPI = 8192;
 
+  /// Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+  static const int WINDOW_MOUSE_PASSTHROUGH = 16384;
+
   /// Set to try enabling MSAA 4X
   static const int MSAA_4X_HINT = 32;
 
@@ -8690,28 +13485,28 @@ abstract class ConfigFlags {
 /// NOTE: Organized by priority level
 abstract class TraceLogLevel {
   /// Display all logs
-  static const int LOG_ALL = 0;
+  static const int ALL = 0;
 
   /// Trace logging, intended for internal use only
-  static const int LOG_TRACE = 1;
+  static const int TRACE = 1;
 
   /// Debug logging, used for internal debugging, it should be disabled on release builds
-  static const int LOG_DEBUG = 2;
+  static const int DEBUG = 2;
 
   /// Info logging, used for program execution info
-  static const int LOG_INFO = 3;
+  static const int INFO = 3;
 
   /// Warning logging, used on recoverable failures
-  static const int LOG_WARNING = 4;
+  static const int WARNING = 4;
 
   /// Error logging, used on unrecoverable failures
-  static const int LOG_ERROR = 5;
+  static const int ERROR = 5;
 
   /// Fatal logging, used to abort program: exit(EXIT_FAILURE)
-  static const int LOG_FATAL = 6;
+  static const int FATAL = 6;
 
   /// Disable logging
-  static const int LOG_NONE = 7;
+  static const int NONE = 7;
 }
 
 /// Keyboard keys (US keyboard layout)
@@ -9420,7 +14215,7 @@ abstract class PixelFormat {
 /// NOTE 1: Filtering considers mipmaps if available in the texture
 /// NOTE 2: Filter is accordingly set for minification and magnification
 abstract class TextureFilter {
-  /// No filter, just pixel aproximation
+  /// No filter, just pixel approximation
   static const int POINT = 0;
 
   /// Linear filtering
@@ -9504,8 +14299,11 @@ abstract class BlendMode {
   /// Blend textures subtracting colors (alternative)
   static const int SUBTRACT_COLORS = 4;
 
-  /// Belnd textures using custom src/dst factors (use rlSetBlendMode())
-  static const int CUSTOM = 5;
+  /// Blend premultiplied textures considering alpha
+  static const int ALPHA_PREMULTIPLY = 5;
+
+  /// Blend textures using custom src/dst factors (use rlSetBlendMode())
+  static const int CUSTOM = 6;
 }
 
 /// Gesture
@@ -9592,21 +14390,7 @@ typedef Camera = Camera3D;
 /// WARNING: This callbacks are intended for advance users
 typedef TraceLogCallback = ffi.Pointer<
     ffi.NativeFunction<
-        ffi.Void Function(
-            ffi.Int32, ffi.Pointer<ffi.Int8>, ffi.Pointer<__va_list_tag>)>>;
-
-class __va_list_tag extends ffi.Struct {
-  @ffi.Uint32()
-  external int gp_offset;
-
-  @ffi.Uint32()
-  external int fp_offset;
-
-  external ffi.Pointer<ffi.Void> overflow_arg_area;
-
-  external ffi.Pointer<ffi.Void> reg_save_area;
-}
-
+        ffi.Void Function(ffi.Int32, ffi.Pointer<ffi.Int8>, va_list)>>;
 typedef LoadFileDataCallback = ffi.Pointer<
     ffi.NativeFunction<
         ffi.Pointer<ffi.Uint8> Function(
@@ -9624,9 +14408,506 @@ typedef SaveFileTextCallback = ffi.Pointer<
 /// TextureCubemap, same as Texture
 typedef TextureCubemap = Texture;
 
-const int __GNUC_VA_LIST = 1;
+/// ------------------------------------------------------------------------------------
+/// Audio Loading and Playing Functions (Module: audio)
+/// ------------------------------------------------------------------------------------
+typedef AudioCallback = ffi.Pointer<
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Uint32)>>;
 
-const String RAYLIB_VERSION = '4.0';
+/// ----------------------------------------------------------------------------------
+/// Types and Structures Definition
+/// ----------------------------------------------------------------------------------
+abstract class rlGlVersion {
+  static const int OPENGL_11 = 1;
+  static const int OPENGL_21 = 2;
+  static const int OPENGL_33 = 3;
+  static const int OPENGL_43 = 4;
+  static const int OPENGL_ES_20 = 5;
+}
+
+abstract class rlFramebufferAttachType {
+  static const int RL_ATTACHMENT_COLOR_CHANNEL0 = 0;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL1 = 1;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL2 = 2;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL3 = 3;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL4 = 4;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL5 = 5;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL6 = 6;
+  static const int RL_ATTACHMENT_COLOR_CHANNEL7 = 7;
+  static const int RL_ATTACHMENT_DEPTH = 100;
+  static const int RL_ATTACHMENT_STENCIL = 200;
+}
+
+abstract class rlFramebufferAttachTextureType {
+  static const int RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0;
+  static const int RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1;
+  static const int RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2;
+  static const int RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3;
+  static const int RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4;
+  static const int RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5;
+  static const int RL_ATTACHMENT_TEXTURE2D = 100;
+  static const int RL_ATTACHMENT_RENDERBUFFER = 200;
+}
+
+/// Dynamic vertex buffers (position + texcoords + colors + indices arrays)
+class rlVertexBuffer extends ffi.Struct {
+  /// Number of elements in the buffer (QUADS)
+  @ffi.Int32()
+  external int elementCount;
+
+  /// Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+  external ffi.Pointer<ffi.Float> vertices;
+
+  /// Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+  external ffi.Pointer<ffi.Float> texcoords;
+
+  /// Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+  external ffi.Pointer<ffi.Uint8> colors;
+
+  /// Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+  external ffi.Pointer<ffi.Uint32> indices;
+
+  /// OpenGL Vertex Array Object id
+  @ffi.Uint32()
+  external int vaoId;
+
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Uint32> vboId;
+}
+
+/// Draw call type
+/// NOTE: Only texture changes register a new draw, other state-change-related elements are not
+/// used at this moment (vaoId, shaderId, matrices), raylib just forces a batch draw call if any
+/// of those state-change happens (this is done in core module)
+class rlDrawCall extends ffi.Struct {
+  /// Drawing mode: LINES, TRIANGLES, QUADS
+  @ffi.Int32()
+  external int mode;
+
+  /// Number of vertex of the draw
+  @ffi.Int32()
+  external int vertexCount;
+
+  /// Number of vertex required for index alignment (LINES, TRIANGLES)
+  @ffi.Int32()
+  external int vertexAlignment;
+
+  /// Texture id to be used on the draw -> Use to create new draw call if changes
+  @ffi.Uint32()
+  external int textureId;
+}
+
+/// rlRenderBatch type
+class rlRenderBatch extends ffi.Struct {
+  /// Number of vertex buffers (multi-buffering support)
+  @ffi.Int32()
+  external int bufferCount;
+
+  /// Current buffer tracking in case of multi-buffering
+  @ffi.Int32()
+  external int currentBuffer;
+
+  /// Dynamic buffer(s) for vertex data
+  external ffi.Pointer<rlVertexBuffer> vertexBuffer;
+
+  /// Draw calls array, depends on textureId
+  external ffi.Pointer<rlDrawCall> draws;
+
+  /// Draw calls counter
+  @ffi.Int32()
+  external int drawCounter;
+
+  /// Current depth value for next draw
+  @ffi.Float()
+  external double currentDepth;
+}
+
+/// Trace log level
+/// NOTE: Organized by priority level
+abstract class rlTraceLogLevel {
+  /// Display all logs
+  static const int RL_LOG_ALL = 0;
+
+  /// Trace logging, intended for internal use only
+  static const int RL_LOG_TRACE = 1;
+
+  /// Debug logging, used for internal debugging, it should be disabled on release builds
+  static const int RL_LOG_DEBUG = 2;
+
+  /// Info logging, used for program execution info
+  static const int RL_LOG_INFO = 3;
+
+  /// Warning logging, used on recoverable failures
+  static const int RL_LOG_WARNING = 4;
+
+  /// Error logging, used on unrecoverable failures
+  static const int RL_LOG_ERROR = 5;
+
+  /// Fatal logging, used to abort program: exit(EXIT_FAILURE)
+  static const int RL_LOG_FATAL = 6;
+
+  /// Disable logging
+  static const int RL_LOG_NONE = 7;
+}
+
+/// Texture formats (support depends on OpenGL version)
+abstract class rlPixelFormat {
+  /// 8 bit per pixel (no alpha)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1;
+
+  /// 8*2 bpp (2 channels)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2;
+
+  /// 16 bpp
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3;
+
+  /// 24 bpp
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4;
+
+  /// 16 bpp (1 bit alpha)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5;
+
+  /// 16 bpp (4 bit alpha)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6;
+
+  /// 32 bpp
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7;
+
+  /// 32 bpp (1 channel - float)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8;
+
+  /// 32*3 bpp (3 channels - float)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9;
+
+  /// 32*4 bpp (4 channels - float)
+  static const int RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10;
+
+  /// 4 bpp (no alpha)
+  static const int RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11;
+
+  /// 4 bpp (1 bit alpha)
+  static const int RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12;
+
+  /// 8 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13;
+
+  /// 8 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14;
+
+  /// 4 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15;
+
+  /// 4 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16;
+
+  /// 8 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17;
+
+  /// 4 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18;
+
+  /// 4 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19;
+
+  /// 8 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20;
+
+  /// 2 bpp
+  static const int RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21;
+}
+
+/// Texture parameters: filter mode
+/// NOTE 1: Filtering considers mipmaps if available in the texture
+/// NOTE 2: Filter is accordingly set for minification and magnification
+abstract class rlTextureFilter {
+  /// No filter, just pixel approximation
+  static const int RL_TEXTURE_FILTER_POINT = 0;
+
+  /// Linear filtering
+  static const int RL_TEXTURE_FILTER_BILINEAR = 1;
+
+  /// Trilinear filtering (linear with mipmaps)
+  static const int RL_TEXTURE_FILTER_TRILINEAR = 2;
+
+  /// Anisotropic filtering 4x
+  static const int RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3;
+
+  /// Anisotropic filtering 8x
+  static const int RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4;
+
+  /// Anisotropic filtering 16x
+  static const int RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5;
+}
+
+/// Color blending modes (pre-defined)
+abstract class rlBlendMode {
+  /// Blend textures considering alpha (default)
+  static const int RL_BLEND_ALPHA = 0;
+
+  /// Blend textures adding colors
+  static const int RL_BLEND_ADDITIVE = 1;
+
+  /// Blend textures multiplying colors
+  static const int RL_BLEND_MULTIPLIED = 2;
+
+  /// Blend textures adding colors (alternative)
+  static const int RL_BLEND_ADD_COLORS = 3;
+
+  /// Blend textures subtracting colors (alternative)
+  static const int RL_BLEND_SUBTRACT_COLORS = 4;
+
+  /// Blend premultiplied textures considering alpha
+  static const int RL_BLEND_ALPHA_PREMULTIPLY = 5;
+
+  /// Blend textures using custom src/dst factors (use rlSetBlendFactors())
+  static const int RL_BLEND_CUSTOM = 6;
+}
+
+/// Shader location point type
+abstract class rlShaderLocationIndex {
+  /// Shader location: vertex attribute: position
+  static const int RL_SHADER_LOC_VERTEX_POSITION = 0;
+
+  /// Shader location: vertex attribute: texcoord01
+  static const int RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1;
+
+  /// Shader location: vertex attribute: texcoord02
+  static const int RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2;
+
+  /// Shader location: vertex attribute: normal
+  static const int RL_SHADER_LOC_VERTEX_NORMAL = 3;
+
+  /// Shader location: vertex attribute: tangent
+  static const int RL_SHADER_LOC_VERTEX_TANGENT = 4;
+
+  /// Shader location: vertex attribute: color
+  static const int RL_SHADER_LOC_VERTEX_COLOR = 5;
+
+  /// Shader location: matrix uniform: model-view-projection
+  static const int RL_SHADER_LOC_MATRIX_MVP = 6;
+
+  /// Shader location: matrix uniform: view (camera transform)
+  static const int RL_SHADER_LOC_MATRIX_VIEW = 7;
+
+  /// Shader location: matrix uniform: projection
+  static const int RL_SHADER_LOC_MATRIX_PROJECTION = 8;
+
+  /// Shader location: matrix uniform: model (transform)
+  static const int RL_SHADER_LOC_MATRIX_MODEL = 9;
+
+  /// Shader location: matrix uniform: normal
+  static const int RL_SHADER_LOC_MATRIX_NORMAL = 10;
+
+  /// Shader location: vector uniform: view
+  static const int RL_SHADER_LOC_VECTOR_VIEW = 11;
+
+  /// Shader location: vector uniform: diffuse color
+  static const int RL_SHADER_LOC_COLOR_DIFFUSE = 12;
+
+  /// Shader location: vector uniform: specular color
+  static const int RL_SHADER_LOC_COLOR_SPECULAR = 13;
+
+  /// Shader location: vector uniform: ambient color
+  static const int RL_SHADER_LOC_COLOR_AMBIENT = 14;
+
+  /// Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
+  static const int RL_SHADER_LOC_MAP_ALBEDO = 15;
+
+  /// Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
+  static const int RL_SHADER_LOC_MAP_METALNESS = 16;
+
+  /// Shader location: sampler2d texture: normal
+  static const int RL_SHADER_LOC_MAP_NORMAL = 17;
+
+  /// Shader location: sampler2d texture: roughness
+  static const int RL_SHADER_LOC_MAP_ROUGHNESS = 18;
+
+  /// Shader location: sampler2d texture: occlusion
+  static const int RL_SHADER_LOC_MAP_OCCLUSION = 19;
+
+  /// Shader location: sampler2d texture: emission
+  static const int RL_SHADER_LOC_MAP_EMISSION = 20;
+
+  /// Shader location: sampler2d texture: height
+  static const int RL_SHADER_LOC_MAP_HEIGHT = 21;
+
+  /// Shader location: samplerCube texture: cubemap
+  static const int RL_SHADER_LOC_MAP_CUBEMAP = 22;
+
+  /// Shader location: samplerCube texture: irradiance
+  static const int RL_SHADER_LOC_MAP_IRRADIANCE = 23;
+
+  /// Shader location: samplerCube texture: prefilter
+  static const int RL_SHADER_LOC_MAP_PREFILTER = 24;
+
+  /// Shader location: sampler2d texture: brdf
+  static const int RL_SHADER_LOC_MAP_BRDF = 25;
+}
+
+/// Shader uniform data type
+abstract class rlShaderUniformDataType {
+  /// Shader uniform type: float
+  static const int RL_SHADER_UNIFORM_FLOAT = 0;
+
+  /// Shader uniform type: vec2 (2 float)
+  static const int RL_SHADER_UNIFORM_VEC2 = 1;
+
+  /// Shader uniform type: vec3 (3 float)
+  static const int RL_SHADER_UNIFORM_VEC3 = 2;
+
+  /// Shader uniform type: vec4 (4 float)
+  static const int RL_SHADER_UNIFORM_VEC4 = 3;
+
+  /// Shader uniform type: int
+  static const int RL_SHADER_UNIFORM_INT = 4;
+
+  /// Shader uniform type: ivec2 (2 int)
+  static const int RL_SHADER_UNIFORM_IVEC2 = 5;
+
+  /// Shader uniform type: ivec3 (3 int)
+  static const int RL_SHADER_UNIFORM_IVEC3 = 6;
+
+  /// Shader uniform type: ivec4 (4 int)
+  static const int RL_SHADER_UNIFORM_IVEC4 = 7;
+
+  /// Shader uniform type: sampler2d
+  static const int RL_SHADER_UNIFORM_SAMPLER2D = 8;
+}
+
+/// Shader attribute data types
+abstract class rlShaderAttributeDataType {
+  /// Shader attribute type: float
+  static const int RL_SHADER_ATTRIB_FLOAT = 0;
+
+  /// Shader attribute type: vec2 (2 float)
+  static const int RL_SHADER_ATTRIB_VEC2 = 1;
+
+  /// Shader attribute type: vec3 (3 float)
+  static const int RL_SHADER_ATTRIB_VEC3 = 2;
+
+  /// Shader attribute type: vec4 (4 float)
+  static const int RL_SHADER_ATTRIB_VEC4 = 3;
+}
+
+/// NOTE: Helper types to be used instead of array return types for *ToFloat functions
+class float3 extends ffi.Struct {
+  @ffi.Array.multi([3])
+  external ffi.Array<ffi.Float> v;
+}
+
+class float16 extends ffi.Struct {
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Float> v;
+}
+
+typedef wchar_t = ffi.Uint16;
+
+class __crt_locale_data_public extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint16> _locale_pctype;
+
+  @ffi.Int32()
+  external int _locale_mb_cur_max;
+
+  @ffi.Uint32()
+  external int _locale_lc_codepage;
+}
+
+class __crt_locale_pointers extends ffi.Struct {
+  external ffi.Pointer<__crt_locale_data> locinfo;
+
+  external ffi.Pointer<__crt_multibyte_data> mbcinfo;
+}
+
+class __crt_locale_data extends ffi.Opaque {}
+
+class __crt_multibyte_data extends ffi.Opaque {}
+
+class _Mbstatet extends ffi.Struct {
+  @ffi.Uint64()
+  external int _Wchar;
+
+  @ffi.Uint16()
+  external int _Byte;
+
+  @ffi.Uint16()
+  external int _State;
+}
+
+class _exception extends ffi.Struct {
+  @ffi.Int32()
+  external int type;
+
+  external ffi.Pointer<ffi.Int8> name;
+
+  @ffi.Double()
+  external double arg1;
+
+  @ffi.Double()
+  external double arg2;
+
+  @ffi.Double()
+  external double retval;
+}
+
+class _complex extends ffi.Struct {
+  @ffi.Double()
+  external double x;
+
+  @ffi.Double()
+  external double y;
+}
+
+class _double_val extends ffi.Union {
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Uint16> _Sh;
+
+  @ffi.Double()
+  external double _Val;
+}
+
+class _float_val extends ffi.Union {
+  @ffi.Array.multi([2])
+  external ffi.Array<ffi.Uint16> _Sh;
+
+  @ffi.Float()
+  external double _Val;
+}
+
+class _ldouble_val extends ffi.Opaque {}
+
+class _float_const extends ffi.Opaque {}
+
+typedef _locale_t = ffi.Pointer<__crt_locale_pointers>;
+
+const int _VCRT_COMPILER_PREPROCESSOR = 1;
+
+const int _SAL_VERSION = 20;
+
+const int __SAL_H_VERSION = 180000000;
+
+const int _USE_DECLSPECS_FOR_SAL = 0;
+
+const int _USE_ATTRIBUTES_FOR_SAL = 0;
+
+const int _CRT_PACKING = 8;
+
+const int _VCRUNTIME_DISABLED_WARNINGS = 4514;
+
+const int _HAS_EXCEPTIONS = 1;
+
+const int _WCHAR_T_DEFINED = 1;
+
+const int NULL = 0;
+
+const int _HAS_CXX17 = 0;
+
+const int _HAS_CXX20 = 0;
+
+const int _HAS_CXX23 = 0;
+
+const int _HAS_NODISCARD = 1;
+
+const String RAYLIB_VERSION = '4.2';
 
 const double PI = 3.1415927410125732;
 
@@ -9634,9 +14915,11 @@ const double DEG2RAD = 0.01745329238474369;
 
 const double RAD2DEG = 57.2957763671875;
 
-const int true1 = 1;
+const int __bool_true_false_are_defined = 1;
 
 const int false1 = 0;
+
+const int true1 = 1;
 
 const int MOUSE_LEFT_BUTTON = 0;
 
@@ -9651,3 +14934,285 @@ const int MATERIAL_MAP_SPECULAR = 1;
 const int SHADER_LOC_MAP_DIFFUSE = 15;
 
 const int SHADER_LOC_MAP_SPECULAR = 16;
+
+const String RLGL_VERSION = '4.0';
+
+const int RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192;
+
+const int RL_DEFAULT_BATCH_BUFFERS = 1;
+
+const int RL_DEFAULT_BATCH_DRAWCALLS = 256;
+
+const int RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4;
+
+const int RL_MAX_MATRIX_STACK_SIZE = 32;
+
+const int RL_MAX_SHADER_LOCATIONS = 32;
+
+const double RL_CULL_DISTANCE_NEAR = 0.01;
+
+const double RL_CULL_DISTANCE_FAR = 1000.0;
+
+const int RL_TEXTURE_WRAP_S = 10242;
+
+const int RL_TEXTURE_WRAP_T = 10243;
+
+const int RL_TEXTURE_MAG_FILTER = 10240;
+
+const int RL_TEXTURE_MIN_FILTER = 10241;
+
+const int RL_TEXTURE_FILTER_NEAREST = 9728;
+
+const int RL_TEXTURE_FILTER_LINEAR = 9729;
+
+const int RL_TEXTURE_FILTER_MIP_NEAREST = 9984;
+
+const int RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986;
+
+const int RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985;
+
+const int RL_TEXTURE_FILTER_MIP_LINEAR = 9987;
+
+const int RL_TEXTURE_FILTER_ANISOTROPIC = 12288;
+
+const int RL_TEXTURE_WRAP_REPEAT = 10497;
+
+const int RL_TEXTURE_WRAP_CLAMP = 33071;
+
+const int RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648;
+
+const int RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626;
+
+const int RL_MODELVIEW = 5888;
+
+const int RL_PROJECTION = 5889;
+
+const int RL_TEXTURE = 5890;
+
+const int RL_LINES = 1;
+
+const int RL_TRIANGLES = 4;
+
+const int RL_QUADS = 7;
+
+const int RL_UNSIGNED_BYTE = 5121;
+
+const int RL_FLOAT = 5126;
+
+const int RL_STREAM_DRAW = 35040;
+
+const int RL_STREAM_READ = 35041;
+
+const int RL_STREAM_COPY = 35042;
+
+const int RL_STATIC_DRAW = 35044;
+
+const int RL_STATIC_READ = 35045;
+
+const int RL_STATIC_COPY = 35046;
+
+const int RL_DYNAMIC_DRAW = 35048;
+
+const int RL_DYNAMIC_READ = 35049;
+
+const int RL_DYNAMIC_COPY = 35050;
+
+const int RL_FRAGMENT_SHADER = 35632;
+
+const int RL_VERTEX_SHADER = 35633;
+
+const int RL_COMPUTE_SHADER = 37305;
+
+const int RL_SHADER_LOC_MAP_DIFFUSE = 15;
+
+const int RL_SHADER_LOC_MAP_SPECULAR = 16;
+
+const double EPSILON = 9.999999974752427e-7;
+
+const int _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE = 1;
+
+const int _CRT_BUILD_DESKTOP_APP = 1;
+
+const int _UCRT_DISABLED_WARNINGS = 4324;
+
+const int _ARGMAX = 100;
+
+const int _TRUNCATE = -1;
+
+const int _CRT_INT_MAX = 2147483647;
+
+const int _CRT_SIZE_MAX = -1;
+
+const String __FILEW__ = 't';
+
+const int _CRT_FUNCTIONS_REQUIRED = 1;
+
+const int _CRT_HAS_CXX17 = 0;
+
+const int _CRT_HAS_C11 = 0;
+
+const int _CRT_INTERNAL_NONSTDC_NAMES = 1;
+
+const int __STDC_SECURE_LIB__ = 200411;
+
+const int __GOT_SECURE_LIB__ = 200411;
+
+const int __STDC_WANT_SECURE_LIB__ = 1;
+
+const int _SECURECRT_FILL_BUFFER_PATTERN = 254;
+
+const int _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES = 0;
+
+const int _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT = 0;
+
+const int _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES = 1;
+
+const int _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_MEMORY = 0;
+
+const int _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES_MEMORY = 0;
+
+const int _DOMAIN = 1;
+
+const int _SING = 2;
+
+const int _OVERFLOW = 3;
+
+const int _UNDERFLOW = 4;
+
+const int _TLOSS = 5;
+
+const int _PLOSS = 6;
+
+const double _HUGE_ENUF = 1e+300;
+
+const double INFINITY = double.infinity;
+
+const double HUGE_VAL = double.infinity;
+
+const double HUGE_VALF = double.infinity;
+
+const double HUGE_VALL = double.infinity;
+
+const double NAN = double.nan;
+
+const int _DENORM = -2;
+
+const int _FINITE = -1;
+
+const int _INFCODE = 1;
+
+const int _NANCODE = 2;
+
+const int FP_INFINITE = 1;
+
+const int FP_NAN = 2;
+
+const int FP_NORMAL = -1;
+
+const int FP_SUBNORMAL = -2;
+
+const int FP_ZERO = 0;
+
+const int _C2 = 1;
+
+const int FP_ILOGB0 = -2147483648;
+
+const int FP_ILOGBNAN = 2147483647;
+
+const int MATH_ERRNO = 1;
+
+const int MATH_ERREXCEPT = 2;
+
+const int math_errhandling = 3;
+
+const int _FE_DIVBYZERO = 4;
+
+const int _FE_INEXACT = 32;
+
+const int _FE_INVALID = 1;
+
+const int _FE_OVERFLOW = 8;
+
+const int _FE_UNDERFLOW = 16;
+
+const int _D0_C = 3;
+
+const int _D1_C = 2;
+
+const int _D2_C = 1;
+
+const int _D3_C = 0;
+
+const int _DBIAS = 1022;
+
+const int _DOFF = 4;
+
+const int _F0_C = 1;
+
+const int _F1_C = 0;
+
+const int _FBIAS = 126;
+
+const int _FOFF = 7;
+
+const int _FRND = 1;
+
+const int _L0_C = 3;
+
+const int _L1_C = 2;
+
+const int _L2_C = 1;
+
+const int _L3_C = 0;
+
+const int _LBIAS = 1022;
+
+const int _LOFF = 4;
+
+const int _DFRAC = 15;
+
+const int _DMASK = 32752;
+
+const int _DMAX = 2047;
+
+const int _DSIGN = 32768;
+
+const int _FFRAC = 127;
+
+const int _FMASK = 32640;
+
+const int _FMAX = 255;
+
+const int _FSIGN = 32768;
+
+const int _LFRAC = 65535;
+
+const int _LMASK = 32767;
+
+const int _LMAX = 32767;
+
+const int _LSIGN = 32768;
+
+const int _DHUGE_EXP = 1842;
+
+const int _FHUGE_EXP = 229;
+
+const int _LHUGE_EXP = 29490;
+
+const int _FP_LT = 1;
+
+const int _FP_EQ = 2;
+
+const int _FP_GT = 4;
+
+const int DOMAIN = 1;
+
+const int SING = 2;
+
+const int OVERFLOW = 3;
+
+const int UNDERFLOW = 4;
+
+const int TLOSS = 5;
+
+const int PLOSS = 6;
