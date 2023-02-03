@@ -14,6 +14,11 @@ class Material extends NativeClass<raylib.Material> {
   /// Material shader.
   Shader get shader => Shader.fromRef(ref.shader);
 
+  /// Sets the shader for this material
+  void setShader(Shader newShader) {
+    shader.ref = newShader.ref;
+  }
+
   /// Material maps array (MAX_MATERIAL_MAPS).
   PointerList<raylib.MaterialMap> get maps => PointerList(ref.maps);
 
