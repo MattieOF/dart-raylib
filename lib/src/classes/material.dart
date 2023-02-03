@@ -16,7 +16,7 @@ class Material extends NativeClass<raylib.Material> {
 
   /// Sets the shader for this material
   void setShader(Shader newShader) {
-    shader.ref = newShader.ref;
+    ref.shader = newShader.ref;
   }
 
   /// Material maps array (MAX_MATERIAL_MAPS).
