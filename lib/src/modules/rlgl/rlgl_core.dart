@@ -1,17 +1,25 @@
 import 'package:raylib/src/library.dart';
 
+void enableBackfaceCulling() {
+  library.rlEnableBackfaceCulling();
+}
+
 void disableBackfaceCulling() {
   library.rlDisableBackfaceCulling();
 }
 
-void enableBackfaceCulling() {
-  library.rlEnableBackfaceCulling();
+void enableDepthMask() {
+  library.rlEnableDepthMask();
 }
 
 void disableDepthMask() {
   library.rlDisableDepthMask();
 }
 
-void enableDepthMask() {
-  library.rlEnableDepthMask();
+void enableDepthTest() {
+  library.rlEnableDepthTest();
+}
+
+void disableDepthTest() {
+  library.rlDisableDepthTest();
 }
