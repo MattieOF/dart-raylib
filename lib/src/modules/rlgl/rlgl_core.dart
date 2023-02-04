@@ -23,3 +23,7 @@ void enableDepthTest() {
 void disableDepthTest() {
   library.rlDisableDepthTest();
 }
+
+void clearScreenBuffers() {
+  library.rlClearScreenBuffers();
+}
