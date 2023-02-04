@@ -1,4 +1,3 @@
-import 'package:raylib/raylib.dart';
 import 'package:raylib/src/library.dart';
 
 void disableBackfaceCulling() {
