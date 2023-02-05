@@ -7,8 +7,7 @@ import 'package:raylib/src/utils/native_type.dart';
 /// Matrix, 4x4 components, column major, OpenGL style, right handed.
 class Matrix extends NativeClass<raylib.Matrix> {
   /// Construct zero matrix
-  Matrix() {
-    ref = malloc<raylib.Matrix>(sizeOf<raylib.Matrix>()).ref;
+  Matrix() : super.fromRef(malloc<raylib.Matrix>(sizeOf<raylib.Matrix>()).ref) {
     ref
       ..m0 = 0
       ..m1 = 0
@@ -31,22 +30,22 @@ class Matrix extends NativeClass<raylib.Matrix> {
   /// Construct matrix with provided values
   Matrix.withValues(
       double m0,
-      double m1,
-      double m2,
-      double m3,
       double m4,
-      double m5,
-      double m6,
-      double m7,
       double m8,
-      double m9,
-      double m10,
-      double m11,
       double m12,
+      double m1,
+      double m5,
+      double m9,
       double m13,
+      double m2,
+      double m6,
+      double m10,
       double m14,
-      double m15) {
-    ref = malloc<raylib.Matrix>(sizeOf<raylib.Matrix>()).ref;
+      double m3,
+      double m7,
+      double m11,
+      double m15)
+      : super.fromRef(malloc<raylib.Matrix>(sizeOf<raylib.Matrix>()).ref) {
     ref
       ..m0 = m0
       ..m1 = m1
